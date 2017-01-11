@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\Users\Kong\Desktop\BCALife\VM_MPOS" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Styles/bootstrap.css" publishTime="08/15/2016 13:05:40" />
+    <file relUrl="DropDownTable.aspx" publishTime="08/17/2016 13:41:40" />
+    <file relUrl="Test.aspx" publishTime="09/30/2016 15:56:16" />
+    <file relUrl="AgentProfile.aspx" publishTime="09/30/2016 16:12:31" />
+    <file relUrl="Global.asax" publishTime="08/12/2015 15:30:35" />
+    <file relUrl="Site.Master" publishTime="09/06/2016 14:58:00" />
+    <file relUrl="Images/Search.png" publishTime="08/31/2016 10:09:42" />
+    <file relUrl="AddUser.aspx" publishTime="08/16/2016 09:44:08" />
+    <file relUrl="Scripts/jquery-1.4.1.js" publishTime="08/12/2015 15:30:35" />
+    <file relUrl="bin/AgentMgmt.xml" publishTime="09/30/2016 16:20:55" />
+    <file relUrl="VersionControl.aspx" publishTime="08/15/2016 16:35:59" />
+    <file relUrl="SPAJDistributionDetails.aspx" publishTime="09/06/2016 10:01:12" />
+    <file relUrl="Styles/StyleSheet.css" publishTime="08/19/2015 14:59:46" />
+    <file relUrl="AdminResetPwd.aspx" publishTime="08/16/2016 17:23:34" />
+    <file relUrl="Scripts/jquery.js" publishTime="08/15/2016 09:17:49" />
+    <file relUrl="bin/AgentMgmt.pdb" publishTime="09/30/2016 16:20:55" />
+    <file relUrl="Images/okIcon.png" publishTime="08/18/2015 10:20:08" />
+    <file relUrl="Styles/simple-sidebar.css" publishTime="08/23/2016 16:07:02" />
+    <file relUrl="ImportTable.aspx" publishTime="08/15/2016 17:05:10" />
+    <file relUrl="StyleSheet.css" publishTime="08/14/2015 09:49:59" />
+    <file relUrl="bin/AjaxControlToolkit.dll" publishTime="04/28/2016 11:50:43" />
+    <file relUrl="DataVersion.aspx" publishTime="08/18/2016 17:26:17" />
+    <file relUrl="Images/logo bless final-01.png" publishTime="03/30/2016 09:25:17" />
+    <file relUrl="SPAJDistribution.aspx" publishTime="09/06/2016 10:01:12" />
+    <file relUrl="Styles/Site.css" publishTime="07/13/2016 17:26:30" />
+    <file relUrl="VersionControlResult.aspx" publishTime="07/18/2016 15:14:08" />
+    <file relUrl="Scripts/jquery-1.4.1-vsdoc.js" publishTime="08/12/2015 15:30:35" />
+    <file relUrl="Scripts/jquery-1.4.1.min.js" publishTime="08/12/2015 15:30:35" />
+    <file relUrl="Images/login_box.png" publishTime="03/30/2016 09:25:17" />
+    <file relUrl="Logout.aspx" publishTime="04/27/2016 15:07:28" />
+    <file relUrl="Fonts/glyphicons-halflings-regular.svg" publishTime="08/15/2016 09:18:06" />
+    <file relUrl="ImportAgent.aspx" publishTime="08/15/2016 17:04:48" />
+    <file relUrl="EditAgentAdmin.aspx" publishTime="08/15/2016 16:27:45" />
+    <file relUrl="AgentResetPwd.aspx" publishTime="09/11/2016 13:59:11" />
+    <file relUrl="Login.aspx" publishTime="08/15/2016 14:33:02" />
+    <file relUrl="Images/calendar.png" publishTime="08/30/2016 18:25:27" />
+    <file relUrl="Scripts/bootstrap.min.js" publishTime="08/15/2016 09:17:49" />
+    <file relUrl="Scripts/bootstrap.js" publishTime="08/15/2016 09:17:49" />
+    <file relUrl="Images/errorIcon.png" publishTime="08/18/2015 10:20:08" />
+    <file relUrl="Styles/bootstrap.min.css" publishTime="08/30/2016 18:00:06" />
+    <file relUrl="Web.config" publishTime="09/27/2016 10:52:39" />
+    <file relUrl="SPAJSubmission.aspx" publishTime="09/06/2016 09:59:39" />
+    <file relUrl="bin/AgentMgmt.dll" publishTime="09/30/2016 16:20:55" />
+    <file relUrl="EditAdmin.aspx" publishTime="08/15/2016 16:21:40" />
+  </publishProfile>
+</publishData>

@@ -1,0 +1,10 @@
+04:10:44PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:10:52PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:10:56PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:11:00PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:11:05PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:11:06PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+04:32:59PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Agent_Profile where STATUS IN ('Active')) : Invalid column name 'STATUS'.
+04:33:07PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Agent_Profile where STATUS IN ('Active')) : Invalid column name 'STATUS'.
+04:34:23PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Agent_Profile where STATUS IN ('Active')) : Invalid column name 'STATUS'.
+05:00:13PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Agent_Profile where STATUS IN ('Active')) : Invalid column name 'STATUS'.

@@ -1,0 +1,8 @@
+12:01:14PM -- ExecuteProcedure(DataRetriever, TMLI_Agent_FindStringInTable) : Could not find stored procedure 'TMLI_Agent_FindStringInTable'.
+12:01:14PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+12:02:40PM -- ExecuteProcedure(DataRetriever, TMLI_Agent_FindStringInTable) : Could not find stored procedure 'TMLI_Agent_FindStringInTable'.
+12:05:17PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+12:06:05PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+12:08:52PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+12:09:01PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+12:09:10PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.

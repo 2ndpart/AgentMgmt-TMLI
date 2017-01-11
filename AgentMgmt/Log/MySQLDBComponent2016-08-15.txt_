@@ -1,0 +1,2 @@
+06:26:25PM -- ExecuteProcedure(DataRetriever, sp_FindStringInTable) : Procedure or function 'sp_FindStringInTable' expects parameter '@Status', which was not supplied.
+06:26:28PM -- ExecuteProcedure(DataRetriever, sp_FindStringInTable) : Procedure or function 'sp_FindStringInTable' expects parameter '@Status', which was not supplied.

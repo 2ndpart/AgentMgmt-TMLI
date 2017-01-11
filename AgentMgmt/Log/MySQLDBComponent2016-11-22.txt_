@@ -1,0 +1,4 @@
+05:40:38PM -- ExecuteProcedure(DataRetriever, TMLI_Agent_FindStringInTable) : Procedure or function TMLI_Agent_FindStringInTable has too many arguments specified.
+05:40:38PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+05:40:48PM -- ExecuteSQL(DataRetriever, SELECT * from TMLI_UserModuleAccess where Roles = 'Administrator') : Invalid object name 'TMLI_UserModuleAccess'.
+05:41:02PM -- ExecuteProcedure(DataRetriever, TMLI_Agent_FindStringInTable) : Procedure or function TMLI_Agent_FindStringInTable has too many arguments specified.

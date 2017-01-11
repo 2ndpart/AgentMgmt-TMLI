@@ -1,0 +1,7 @@
+11:15:14AM -- ExecuteSQL(DataRetriever, SELECT ID, kodeposID, kelurahan, kecamatan, jenis, kabupaten, propinsiFROM(kodepos)ORDER BY kodeposIDFFSET ((1 - 1) * 50) ROWSFETCH NEXT @RowspPage ROWS ONLY;) : 'propinsiFROM' is not a recognized built-in function name.
+11:16:12AM -- ExecuteSQL(DataRetriever, SELECT ID, kodeposID, kelurahan, kecamatan, jenis, kabupaten, propinsi FROM(kodepos) ORDER BY kodeposID FFSET ((1 - 1) * 50) ROWS FETCH NEXT @RowspPage ROWS ONLY;) : Incorrect syntax near ')'.
+Must declare the scalar variable "@RowspPage".
+11:17:08AM -- ExecuteSQL(DataRetriever, SELECT ID, kodeposID, kelurahan, kecamatan, jenis, kabupaten, propinsi FROM(kodepos) ORDER BY kodeposID FFSET ((1 - 1) * 50) ROWS FETCH NEXT 50 ROWS ONLY;) : Incorrect syntax near ')'.
+Invalid usage of the option NEXT in the FETCH statement.
+01:59:41PM -- ExecuteSQL(DataRetriever, SELECT ID, kodeposID, kelurahan, kecamatan, jenis, kabupaten, propinsi FROM kodepos ORDER BY kodeposID OFFSET ((1 - 1) * 50) ROWS FETCH NEXT 50 ROWS ONLY;) : Incorrect syntax near 'OFFSET'.
+Invalid usage of the option NEXT in the FETCH statement.

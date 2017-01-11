@@ -1,0 +1,376 @@
+﻿body
+{
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	text-align: center;
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;
+	/*background-color: #3399ff;*/
+	background-color: #0053CE;
+}
+p 
+{
+	font-size: 11px;
+	font-family: Verdana;
+	text-align: left;
+}
+
+
+
+li
+{
+	font-size: 11px;
+	font-family: Verdana;
+	text-align: left;
+}
+
+td {
+	font-size: 11px;
+	font-family: Verdana;
+	text-align: left;
+	vertical-align:top; 
+}
+
+
+/*Label*/
+.MainHeader
+{
+	font-size: 34px;
+	font-family: 'Bauhaus 93';
+	font-weight: bold;
+	font-style: italic;
+	color: #3399ff;
+}
+.Hyperlink
+{
+	font-size: 10px;
+}
+
+.Title
+{
+	font-size: 14px;
+	font-family: Verdana;
+	font-weight: bold;
+	color: #0181CC;
+}
+.Subtitle
+{
+	font-size: 13px;
+	font-family: Verdana;
+	font-weight: bold;
+	color: #808080;
+}
+
+.FormItem
+{
+	font-size: 11px;
+	font-family: Verdana;
+	font-weight: bold;
+	color: #333333;
+}
+
+
+.FormItemGuide
+{
+	font-size: 9px;
+	font-family: Verdana;
+	color: #333333;
+}
+
+
+.FormItemData
+{
+	font-size: 11px;
+	font-family: Verdana;
+	color: #333333;
+}
+
+
+.FormItemDataError
+{
+	font-size: 11px;
+	font-family: Verdana;
+	
+	color:Red;
+}
+
+.TextBox
+{
+	width:300px;
+	font-family: Verdana;
+	font-size: 11px;
+}
+.TextBoxR
+{
+	width: 300px;
+	font-family: Verdana;
+	font-size: 11px;
+
+}
+
+.TextBoxD
+{
+	width:305px;
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.Button
+{
+	width:120px;
+}
+
+
+
+
+
+A:link
+{
+	text-decoration: none;
+	color: #0033FF;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+A:visited
+{
+	text-decoration: none;
+	color: #0033FF;
+	font-weight: bold;
+	font-size: 11px;
+} 
+A:hover
+{
+	text-decoration: none;
+	color: #FF0000;
+	font-weight: bold;
+	font-size: 11px;
+}
+A.MainNavigation:link
+{
+	text-decoration: none;
+	color: White;
+	font-weight: bold;
+	font-size: 10px;
+}
+A.MainNavigation:visited
+{
+	text-decoration: none;
+	color: White;
+	font-weight: bold;
+	font-size: 10px;
+}
+A.MainNavigation:hover
+{
+	text-decoration: none;
+	color: White;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+
+
+
+
+/*table*/
+.TableContent
+{
+	border-spacing: 0px;
+	width:100%;
+}
+.TableContentReg_Td_Left
+{
+	width:1%;
+}
+.TableContentReg_Td_Middle
+{
+	width:98%;
+}
+.TableContentReg_Td_Right
+{
+	width:1%;
+}
+
+.TableContent_Td_Left
+{
+	width:1%;
+}
+.TableContent_Td_Middle
+{
+	width:49%;
+}
+.TableContent_Td_Middle1
+{
+	width:49%;
+}
+.TableContent_Td_Right
+{
+	width:1%;
+}
+
+.TableForm
+{
+	width: 100%;
+	border-spacing: 3px;
+}
+.TableForm_Td_Left
+{
+	width:40%;
+}
+.TableForm_Td_Right
+{
+	width:60%;
+}
+
+.Nav_Bar
+{
+	background-color: #3399ff;
+}
+
+ .GVHeader
+ {
+  background-color:#3399ff; 	
+  padding:5px;
+ }
+
+.GVColumn
+ {
+ padding:10px;
+ 	
+ }
+  .GVRow
+{
+	background-color: #f0fff0;
+}
+ 
+ .GVRowAlt
+{
+	background-color: #b0e0e6;
+}
+ 
+ .GVDataColumn
+ {
+ padding:5px;
+ 	
+ }
+ 
+ .GVDataColumnRight
+ {
+ padding:5px;
+ text-align:right;  
+ 	
+ }
+  .GVDataColumnCenter
+ {
+ padding:5px;
+ text-align:center;  
+ 	
+ }
+ 
+ 
+ .AdsText_Title
+ {
+ font-size: 11px;
+ color: #333333;
+	font-family: Verdana;
+	font-weight:bold;  
+ 
+}
+ .AdsText_Line
+ {
+ font-size: 11px;
+	font-family: Verdana;
+ 
+}
+
+A.AdsTextLink:link
+{
+	text-decoration: none;
+	font-size: 11px;
+	font-weight:normal;
+		color: #333333;
+}
+A.AdsTextLink:hover
+{
+	text-decoration: none;
+	font-size: 11px;
+	font-weight:normal;
+		color: blue;
+}
+A.AdsTextLink:visited
+{
+	text-decoration: none;
+	font-size: 11px;
+	font-weight:normal;
+		color: #333333;
+}
+
+A.AdsHere:link
+{
+	text-decoration: none;
+	font-size: 8px;
+	font-weight:normal;
+	color:Black;
+}
+A.AdsHere:hover
+{
+	text-decoration: none;
+	font-size: 8px;
+	font-weight:normal;
+	color: blue;
+}
+A.AdsHere:visited
+{
+	text-decoration: none;
+	font-size: 8px;
+	font-weight:normal;
+	color:Black;
+}
+
+A.LinkWhite:link
+{
+	text-decoration: none;
+	
+	font-weight:bold;
+	color:White;
+}
+A.LinkWhite:hover
+{
+	text-decoration: none;
+	
+	font-weight:bold;
+	color: White;
+}
+A.LinkWhite:visited
+{
+	text-decoration: none;
+	
+	font-weight:bold;
+	color:White;
+}
+
+.modalBackground
+{
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+.modalPopup {
+	background-color:#ffffdd;
+	border-width:3px;
+	border-style:solid;
+	border-color:Gray;
+	padding:3px;
+	width:250px;
+}
+
+ .cellCRData
+ {
+  text-align:right;  
+  	font-size: 9px;	
+  	vertical-align:top; 
+ }
+

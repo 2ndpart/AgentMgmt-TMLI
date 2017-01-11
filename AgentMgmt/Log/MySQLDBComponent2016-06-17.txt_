@@ -1,0 +1,2 @@
+03:53:49PM -- ExecuteSQL(Update Agent_profile set ) : Object reference not set to an instance of an object.
+03:55:33PM -- ExecuteSQL(Update Agent_profile set ChannelName = 'In-branch' Where ChannelCode = '01') : Object reference not set to an instance of an object.

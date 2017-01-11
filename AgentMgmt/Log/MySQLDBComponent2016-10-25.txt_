@@ -1,0 +1,4 @@
+09:22:00AM -- ExecuteSQL(DataRetriever,  SELECT [UserName], [Password], [Roles], [PasswordChangeSince] FROM TMLI_UserLogin  WHERE [UserName] = 'user' Collate SQL_Latin1_General_CP1_CS_AS AND [Password] = 'DkawpUGF4PPLysgW9+jCXA==' Collate SQL_Latin1_General_CP1_CS_AS) : Invalid object name 'TMLI_UserLogin'.
+09:22:08AM -- ExecuteSQL(DataRetriever,  SELECT [UserName], [Password], [Roles], [PasswordChangeSince] FROM TMLI_UserLogin  WHERE [UserName] = 'user' Collate SQL_Latin1_General_CP1_CS_AS AND [Password] = 'DkawpUGF4PPLysgW9+jCXA==' Collate SQL_Latin1_General_CP1_CS_AS) : Invalid object name 'TMLI_UserLogin'.
+12:16:42PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_eProposal_LA_Details where Status IN ('A')) : Invalid column name 'Status'.
+12:41:33PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Data_Version where Status IN ('A')) : Invalid column name 'Status'.

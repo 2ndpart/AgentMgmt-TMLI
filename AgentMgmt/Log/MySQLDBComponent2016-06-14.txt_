@@ -1,0 +1,1 @@
+11:31:09AM -- ExecuteSQL(Update eProposal_Identification set Identity Desc = 'EXPECTED DELIVERY DATE' ,Status = 'A' ,IsUpdate = getdate(), RowStatus = 'U' Where Identity Code = 'EDD') : Incorrect syntax near the keyword 'Identity'.

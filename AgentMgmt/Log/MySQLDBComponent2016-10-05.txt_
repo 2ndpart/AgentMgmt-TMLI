@@ -1,0 +1,1 @@
+05:14:43PM -- ExecuteSQL(DataRetriever, select AgentID, UDID, AgentName, BLESSVersion, LastUploadDate, LastDownloadDate, Status, BackUpURL from Device_Managementwhere AgentID like ('%k%') or AgentName like ('%k%') or BLESSVersion like ('%k%') Order By AgentName ASC) : Incorrect syntax near the keyword 'like'.

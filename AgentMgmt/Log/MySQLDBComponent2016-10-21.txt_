@@ -1,0 +1,4 @@
+11:38:06AM -- ExecuteSQL(DataRetriever, SELECT AGNTNUM, LGIVNAME, STATUS, UPDATEDATE, LASTLOGIN from TMLI_Agent_Profile AND Status IN ('Active') ORDER BY AGNTNUM ASC) : Incorrect syntax near the keyword 'AND'.
+11:38:52AM -- ExecuteSQL(DataRetriever, SELECT AGNTNUM, LGIVNAME, STATUS, UPDATEDATE, LASTLOGIN from TMLI_Agent_Profile AND Status IN ('Active') ORDER BY AGNTNUM ASC) : Incorrect syntax near the keyword 'AND'.
+11:42:22AM -- ExecuteSQL(DataRetriever, SELECT AGNTNUM, LGIVNAME, STATUS, UPDATEDATE, LASTLOGIN from TMLI_Agent_Profile AND AGNTNUM like ('%k%') OR LGIVNAME like ('%k%') WHERE Status IN ('Active') ORDER BY AGNTNUM ASC) : Incorrect syntax near the keyword 'AND'.
+11:47:10AM -- ExecuteSQL(DataRetriever, SELECT AGNTNUM, LGIVNAME, STATUS, UPDATEDATE, LASTLOGIN from TMLI_Agent_Profile AND Status IN ('Active') WHERE AGNTNUM like ('%k%') OR LGIVNAME like ('%k%') ORDER BY AGNTNUM ASC) : Incorrect syntax near the keyword 'AND'.

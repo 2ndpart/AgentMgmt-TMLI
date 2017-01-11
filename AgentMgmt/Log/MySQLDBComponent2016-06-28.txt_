@@ -1,0 +1,1 @@
+03:14:43PM -- ExecuteSQL(DataRetriever, select * from kodepos WHERE Status = 'A') : Invalid column name 'Status'.

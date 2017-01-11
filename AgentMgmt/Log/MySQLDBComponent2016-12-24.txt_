@@ -1,0 +1,3 @@
+01:47:53PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Score_Prospect_Age where Status IN ('A')) : Invalid column name 'Status'.
+01:54:36PM -- ExecuteSQL(DataRetriever, Select count(*) from TMLI_Score_Prospect_Age where Status IN ('A')) : Invalid column name 'Status'.
+02:02:06PM -- ExecuteSQL(DataRetriever, select distinct Wilayah, Kanwil from Data_Cabang) : Invalid object name 'Data_Cabang'.

@@ -1,0 +1,1 @@
+03:49:27PM -- ExecuteSQL(DataRetriever, SELECT AGNTNUM, LGIVNAME, STATUS, UPDATEDATE, LASTLOGIN from TMLI_Agent_Profile) : The ConnectionString property has not been initialized.

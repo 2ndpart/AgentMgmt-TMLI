@@ -1,0 +1,1 @@
+03:07:54PM -- ExecuteSQL(update DataReferral set Status = 'A' IsNew = GETDATE(), RowStatus = 'N' where  NIP = '80626878') : Incorrect syntax near 'IsNew'.

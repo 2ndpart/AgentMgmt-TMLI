@@ -1,0 +1,7 @@
+12:06:32PM -- ExecuteSQL(DataRetriever, select distinct KodeCabang from Data_Cabang where NamaCabang = 'BANDAR LAMPUNG' and StatusCabang = 'KCU' order by KodeCabang ASC) : Object reference not set to an instance of an object.
+12:07:00PM -- ExecuteSQL(DataRetriever, select distinct KodeCabang from Data_Cabang where NamaCabang = 'SUDIRMAN' and StatusCabang = 'KCU' order by KodeCabang ASC) : Object reference not set to an instance of an object.
+01:02:45PM -- ExecuteSQL(DataRetriever, select distinct KodeCabang from Data_Cabang where NamaCabang = 'BANDAR LAMPUNG' and StatusCabang = 'KCU' order by KodeCabang ASC) : Object reference not set to an instance of an object.
+01:03:02PM -- ExecuteSQL(DataRetriever, select distinct KodeCabang from Data_Cabang where NamaCabang = 'SUDIRMAN' and StatusCabang = 'KCU' order by KodeCabang ASC) : Object reference not set to an instance of an object.
+01:07:21PM -- ExecuteSQL(DataRetriever, select KodeCabang from Data_Cabang where NamaCabang = 'SUDIRMAN' and StatusCabang = 'KCU') : Object reference not set to an instance of an object.
+01:08:15PM -- ExecuteSQL(DataRetriever, select KodeCabang from Data_Cabang where NamaCabang = 'BANDAR LAMPUNG' and StatusCabang = 'KCU') : Object reference not set to an instance of an object.
+01:08:30PM -- ExecuteSQL(DataRetriever, select KodeCabang from Data_Cabang where NamaCabang = 'BANDAR LAMPUNG' and StatusCabang = 'KCU') : Object reference not set to an instance of an object.

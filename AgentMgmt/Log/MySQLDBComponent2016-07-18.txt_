@@ -1,0 +1,1 @@
+03:02:50PM -- ExecuteSQL(Insert into Version_checker values ('4.3', GETDATE())) : Column name or number of supplied values does not match table definition.

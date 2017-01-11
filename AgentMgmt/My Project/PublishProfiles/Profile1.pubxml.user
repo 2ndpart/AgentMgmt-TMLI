@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile>2016-09-30T17:21:07.0694201+07:00</TimeStampOfAssociatedLegacyPublishXmlFile>
+    <_PublishTargetUrl>C:\Users\User\Desktop\TM</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="AddUser.aspx">
+      <publishTime>12/19/2016 18:49:46</publishTime>
+    </File>
+    <File Include="AdminResetPwd.aspx">
+      <publishTime>08/16/2016 18:23:34</publishTime>
+    </File>
+    <File Include="AgentProfile.aspx">
+      <publishTime>01/10/2017 16:26:50</publishTime>
+    </File>
+    <File Include="AgentResetPwd.aspx">
+      <publishTime>10/21/2016 15:16:47</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_login_tertiary.png">
+      <publishTime>01/06/2017 17:04:17</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_news1_primary.png">
+      <publishTime>01/06/2017 17:04:18</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_news2_primary.png">
+      <publishTime>01/06/2017 17:04:18</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_news3_primary.png">
+      <publishTime>01/06/2017 17:04:18</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_spaj_primary.png">
+      <publishTime>01/06/2017 17:04:17</publishTime>
+    </File>
+    <File Include="BackgroundImage/photo_spaj_secondary.png">
+      <publishTime>01/06/2017 17:04:17</publishTime>
+    </File>
+    <File Include="BackgroundImageService.asmx">
+      <publishTime>01/06/2017 16:29:31</publishTime>
+    </File>
+    <File Include="bin/AgentMgmt.dll">
+      <publishTime>01/10/2017 23:02:59</publishTime>
+    </File>
+    <File Include="bin/AgentMgmt.xml">
+      <publishTime>01/10/2017 23:02:59</publishTime>
+    </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>03/08/2015 14:46:21</publishTime>
+    </File>
+    <File Include="bin/AjaxMin.dll">
+      <publishTime>12/04/2013 14:25:38</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>03/08/2015 14:54:15</publishTime>
+    </File>
+    <File Include="DataVersion.aspx">
+      <publishTime>08/18/2016 18:26:17</publishTime>
+    </File>
+    <File Include="DeviceManagement.aspx">
+      <publishTime>10/21/2016 17:14:41</publishTime>
+    </File>
+    <File Include="DropDownTable.aspx">
+      <publishTime>12/26/2016 13:34:16</publishTime>
+    </File>
+    <File Include="EditAdmin.aspx">
+      <publishTime>11/07/2016 12:15:31</publishTime>
+    </File>
+    <File Include="EditAgentAdmin.aspx">
+      <publishTime>08/15/2016 17:27:45</publishTime>
+    </File>
+    <File Include="EmailTemplate - Copy.html">
+      <publishTime>01/04/2017 18:13:38</publishTime>
+    </File>
+    <File Include="EmailTemplate.html">
+      <publishTime>01/05/2017 18:44:28</publishTime>
+    </File>
+    <File Include="Fonts/glyphicons-halflings-regular.svg">
+      <publishTime>08/15/2016 10:18:06</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>08/12/2015 16:30:35</publishTime>
+    </File>
+    <File Include="Images/calendar.png">
+      <publishTime>08/30/2016 19:25:27</publishTime>
+    </File>
+    <File Include="Images/errorIcon.png">
+      <publishTime>08/18/2015 11:20:08</publishTime>
+    </File>
+    <File Include="Images/okIcon.png">
+      <publishTime>08/18/2015 11:20:08</publishTime>
+    </File>
+    <File Include="Images/Search.png">
+      <publishTime>08/31/2016 11:09:42</publishTime>
+    </File>
+    <File Include="ImportAgent.aspx">
+      <publishTime>08/15/2016 18:04:48</publishTime>
+    </File>
+    <File Include="ImportTable.aspx">
+      <publishTime>11/03/2016 18:06:08</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>10/19/2016 12:15:31</publishTime>
+    </File>
+    <File Include="Logout.aspx">
+      <publishTime>04/27/2016 16:07:28</publishTime>
+    </File>
+    <File Include="PhotoUpload.aspx">
+      <publishTime>12/23/2016 19:51:30</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>08/15/2016 10:17:49</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>08/15/2016 10:17:49</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1-vsdoc.js">
+      <publishTime>08/12/2015 16:30:35</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1.js">
+      <publishTime>08/12/2015 16:30:35</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.4.1.min.js">
+      <publishTime>08/12/2015 16:30:35</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>08/15/2016 10:17:49</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>01/06/2017 20:42:44</publishTime>
+    </File>
+    <File Include="SPAJDistribution.aspx">
+      <publishTime>11/21/2016 17:40:36</publishTime>
+    </File>
+    <File Include="SPAJDistributionDetails.aspx">
+      <publishTime>11/21/2016 17:40:44</publishTime>
+    </File>
+    <File Include="SPAJSubmission.aspx">
+      <publishTime>09/06/2016 10:59:39</publishTime>
+    </File>
+    <File Include="Styles/bootstrap.css">
+      <publishTime>08/15/2016 14:05:40</publishTime>
+    </File>
+    <File Include="Styles/bootstrap.min.css">
+      <publishTime>10/05/2016 12:28:06</publishTime>
+    </File>
+    <File Include="Styles/simple-sidebar.css">
+      <publishTime>08/23/2016 17:07:02</publishTime>
+    </File>
+    <File Include="Styles/Site.css">
+      <publishTime>07/13/2016 18:26:30</publishTime>
+    </File>
+    <File Include="Styles/StyleSheet.css">
+      <publishTime>08/19/2015 15:59:46</publishTime>
+    </File>
+    <File Include="StyleSheet.css">
+      <publishTime>08/14/2015 10:49:59</publishTime>
+    </File>
+    <File Include="UploadPhoto.aspx">
+      <publishTime>01/09/2017 16:35:39</publishTime>
+    </File>
+    <File Include="VersionControl.aspx">
+      <publishTime>08/15/2016 17:35:59</publishTime>
+    </File>
+    <File Include="VersionControlResult.aspx">
+      <publishTime>11/04/2016 13:44:56</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/10/2017 23:03:02</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

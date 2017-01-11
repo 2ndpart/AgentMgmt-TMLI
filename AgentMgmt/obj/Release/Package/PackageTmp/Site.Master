@@ -1,0 +1,148 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Site.master.vb" Inherits="AgentMgmt.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+    <title>MPOS Server</title>
+
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/simple-sidebar.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    
+</head>
+<body>
+<form id="Form1" runat="server">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#menu-toggle" class="navbar-brand" id="menu-toggle">MPOS Server</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="btn_lgout" runat="server" onserverclick="btn_lgout_Click">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <br />
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul runat="server" id="sidebar" class="sidebar-nav">
+                <br />
+                <br />
+                <li id="Agent_Profile" runat="server" visible="false">
+                    <a href="AgentProfile.aspx">Agent Profile</a>
+                </li>
+                <li id="Table_Maintenance" runat="server" visible="false">
+                    <a href="DropDownTable.aspx">Table Maintenance</a>
+                </li>
+                <li id="TMCONNECT_Version" runat="server" visible="false">
+                    <a href="VersionControl.aspx">TMConnect Version</a>
+                </li>
+                <%--<li>
+                    <a href="DataVersion.aspx">Data Version</a>
+                </li>--%>
+                <li id="User_Management" runat="server" visible="false">
+                    <a href="AddUser.aspx">User Management</a>
+                </li>
+                <li id="Edit_TMCONNECT_Client" runat="server" visible="false">
+                    <a href="EditAgentAdmin.aspx">Edit Client Admin Password</a>
+                </li>
+                <li id="Edit_TMCONNECT_Server" runat="server" visible="false">
+                    <a href="EditAdmin.aspx">Edit Server Admin Password</a>
+                </li>
+                
+                <li id="SPAJ_Admin" runat="server" visible="false">
+                    <a href="SPAJDistribution.aspx">SPAJ Distribution</a>
+                </li>
+                <li id="VA_Number_Listing" runat="server" visible="false">
+                    <a href="#">VA Number Listing</a>
+                </li>
+                <li id="SPAJ_Submission_List" runat="server" visible="false">
+                    <a href="SPAJSubmission.aspx">SPAJ Submission</a>
+                </li>
+                <li id="STP_Rules_Table" runat="server" visible="false">
+                    <a href="#">STP Rules Table</a>
+                </li>
+                <li id="Product_Configurator" runat="server" visible="false">
+                    <a href="#">Product Configurator</a>
+                </li>
+                <li id="TMCONNECT_Client_Photos" runat="server" visible="false">
+                    <a href="UploadPhoto.aspx">TMCONNECT Client Photos</a>
+                </li>
+                <li id="Payment_Lsting" runat="server" visible="false">
+                    <a href="#">Payment Listing</a>
+                </li>
+                <%--<li id="fooItem" runat="server">
+                    <a href="DeviceManagement.aspx">Device Management</a>
+                </li>--%>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <%--<asp:scriptmanager ID="ScriptManager1" runat="server"></asp:scriptmanager>--%>
+                        <div class="main">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                        </div>
+                        <footer style="position: relative;">
+                            <p class="text-muted"  align="center">TMConnect Servers Version 1.0 Copyright by Tokio Marine</p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+        
+    <!-- jQuery -->
+    <script src="Scripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //alert("begin");
+            var intWindowHeight = $(window).height();
+            var intFooterHeight = $("footer").height();
+            var intWindowMinHeight = (intWindowHeight - intFooterHeight) - 40;
+            //alert("intWindowMinHeight = " + intWindowMinHeight + ", intWindowHeight = " + intWindowHeight + ", intFooterHeight = " + intFooterHeight);
+
+            $(".main").css("min-height", intWindowMinHeight);
+        });
+    </script>
+</form>
+</body>
+</html>
