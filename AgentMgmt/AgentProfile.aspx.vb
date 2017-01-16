@@ -29,7 +29,7 @@ Public Class AgentProfile
 
     Protected Sub LoadAgentProfile(ByVal pageIndex As Integer)
         Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(CStr(POSWeb.POSWeb_SQLConn))
-        Dim dt As New DataSet
+        Dim dt As New DataTable
 
         Dim sql As String = "SELECT * from CRAZY_DATA"
         Dim condition As String = String.Empty
@@ -76,11 +76,11 @@ Public Class AgentProfile
         '    objDBCom.ExecuteSQL(temptable, sqlquery3)
         'End If
 
-        If dt.Tables(0).Rows.Count <> 0 Then
+        If dt.Rows.Count <> 0 Then
             ViewState("Table") = dt
         End If
 
-        GridView1.DataSource = dt.Tables(0)
+        GridView1.DataSource = dt
         GridView1.DataBind()
 
         'Dim recordCount As Integer = 0
@@ -184,7 +184,7 @@ Public Class AgentProfile
             txt_CountryCode.Text = dt.Rows(0)(17).ToString()
             txt_dob.Text = dt.Rows(0)(5).ToString()
             txt_email.Text = dt.Rows(0)(18).ToString()
-            txt_Fname.Text = dt.Rows(0)(2).ToString()
+            txt_Fname.Text = dt.Rows(0)(3).ToString()
             txt_gender.Text = dt.Rows(0)(4).ToString()
             txt_HireDate.Text = dt.Rows(0)(25).ToString()
             txt_hp1.Text = dt.Rows(0)(20).ToString()
@@ -196,7 +196,7 @@ Public Class AgentProfile
             txt_LicenseExpiryS.Text = dt.Rows(0)(33).ToString()
             txt_LicenseNumC.Text = dt.Rows(0)(30).ToString()
             txt_LicenseNumS.Text = dt.Rows(0)(32).ToString()
-            txt_Lname.Text = dt.Rows(0)(3).ToString()
+            txt_Lname.Text = dt.Rows(0)(2).ToString()
             txt_marryStatus.Text = dt.Rows(0)(9).ToString()
             txt_Mphone.Text = dt.Rows(0)(19).ToString()
             txt_nationality.Text = dt.Rows(0)(8).ToString()

@@ -45,7 +45,7 @@
                     <td>
                         <asp:DropDownList ID="ddl_criteria" runat="server" class="form-control" Width="300px">
                             <asp:ListItem Value="AgentCode">Agent Number</asp:ListItem>
-                            <asp:ListItem Value="AgentName">Name</asp:ListItem>
+                            <asp:ListItem Value="FullName">Full Name</asp:ListItem>
                             <asp:ListItem Value="AgentEmail">Email</asp:ListItem>
                             <asp:ListItem Value="UPDATEDATE">Last Update</asp:ListItem>
                             <asp:ListItem Value="DeviceStatus">Device Status</asp:ListItem>
@@ -112,7 +112,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                         <asp:BoundField DataField="AgentCode" HeaderText="Agent No." SortExpression="AgentCode" />
-                        <asp:BoundField DataField="AgentName" HeaderText="Name" SortExpression="AgentName" />                        
+                        <asp:BoundField DataField="FullName" HeaderText="Full Name" SortExpression="FullName" />                        
                         <asp:BoundField DataField="AgentStatus" HeaderText="Status" SortExpression="AgentStatus" />
                         <asp:BoundField DataField="AgentEmail" HeaderText="Email" SortExpression="AgentName" />
                         <asp:BoundField DataField="InvitationDate" HeaderText="Time Invitation Sended" DataFormatString="{0:MM/dd/yyyy}" SortExpression="InvitationDate" />
