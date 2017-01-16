@@ -152,6 +152,7 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\StyleSheet.css" />
     <Content Include="UploadFiles.aspx" />
+    <Content Include="UploadFilesEdit.aspx" />
     <Content Include="UploadPhoto.aspx" />
     <Content Include="VersionControl.aspx" />
     <Content Include="VersionControlResult.aspx" />
@@ -327,6 +328,13 @@
     <Compile Include="UploadFiles.aspx.vb">
       <DependentUpon>UploadFiles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadFilesEdit.aspx.designer.vb">
+      <DependentUpon>UploadFilesEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFilesEdit.aspx.vb">
+      <DependentUpon>UploadFilesEdit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadPhoto.aspx.designer.vb">
       <DependentUpon>UploadPhoto.aspx</DependentUpon>

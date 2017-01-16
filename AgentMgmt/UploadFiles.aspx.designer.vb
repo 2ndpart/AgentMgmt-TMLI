@@ -41,6 +41,15 @@ Partial Public Class UploadFiles
     Protected WithEvents ddl_select_folder As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''ddl_select_sub_folder control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddl_select_sub_folder As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''myFile control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,42 @@ Partial Public Class UploadFiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents myFile As Global.System.Web.UI.WebControls.FileUpload
+    
+    '''<summary>
+    '''txt_sub_folder_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_sub_folder_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btn_create_sub_folder control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_create_sub_folder As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''txt_search control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_search As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btn_search control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_search As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''btnUpload control.
