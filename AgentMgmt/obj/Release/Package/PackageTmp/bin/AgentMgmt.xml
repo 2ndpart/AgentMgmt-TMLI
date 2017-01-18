@@ -1917,9 +1917,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.UploadFiles._ToolkitScriptManager1">
+<member name="F:AgentMgmt.UploadFiles._ScriptManager1">
 <summary>
-ToolkitScriptManager1 control.
+ScriptManager1 control.
 </summary>
 <remarks>
 Auto-generated field.

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" MasterPageFile="~/Site.Master" Language="vb" AutoEventWireup="false" CodeBehind="UploadFiles.aspx.vb" Inherits="AgentMgmt.UploadFiles" %>
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
@@ -48,7 +47,7 @@
                         //If the header checkbox is checked
                         //check all checkboxes
                         //and highlight all rows
-                        row.style.backgroundColor = "blue";
+                        row.style.backgroundColor = "#c7c8c9";
                         inputList[i].checked = true;
                     }
                     else {
@@ -73,7 +72,7 @@
             var row = objRef.parentNode.parentNode;
             if (objRef.checked) {
                 //If checked change color to Aqua
-                row.style.backgroundColor = "blue";
+                row.style.backgroundColor = "#c7c8c9";
             }
             else {
                 //If not checked change back to original color
@@ -116,7 +115,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajaxToolkit:ToolkitScriptManager>   
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
@@ -157,7 +157,7 @@
                         </asp:DropDownList>
                     </td>
                 </tr>
-                 <tr>                    
+                 <tr class="RowFormFile RowFormDetail">                    
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -168,25 +168,25 @@
                         <%--<ajaxToolkit:AjaxFileUpload ID="myFile" runat="server" MaximumNumberOfFiles="10" />--%>
                     </td>
                 </tr>                            
-                <tr>                    
-                    <td></td>
-                    <td></td>
+                <tr class="RowFormFile RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr class="RowFormFile RowFormDetail">                    
                     <td>File Version</td>
                     <td>
-                        <asp:TextBox ID="txt_version" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_version" runat="server" class="form-control"></asp:TextBox>
                     </td>
-                </tr>
-                <tr>                    
-                    <td></td>
-                    <td></td>
-                </tr>
+                </tr>  
+                <tr class="RowFormFile RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>              
                 <tr class="RowFormFolder RowFormDetail">                    
                     <td>Create Folder Name</td>
                     <td><asp:TextBox ID="txt_folder_name" runat="server" class="form-control" Width="300px"></asp:TextBox></td>
                 </tr>
-                <tr>                    
+                <tr class="RowFormFolder RowFormDetail">                    
                     <td></td>
                     <td></td>
                 </tr>
@@ -196,7 +196,7 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr>                    
+                <tr class="RowFormFolder RowFormDetail">                    
                     <td></td>
                     <td></td>
                 </tr>
@@ -206,7 +206,7 @@
                         <asp:TextBox ID="txt_sub_folder_name" runat="server" class="form-control" Width="300px"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>                    
+                <tr class="RowFormFolder RowFormDetail">                    
                     <td></td>
                     <td></td>
                 </tr>
@@ -216,14 +216,14 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr>                    
+                <tr class="RowFormFolder RowFormDetail">                    
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td>Search</td>
                     <td>                        
-                        <asp:TextBox ID="txt_search" runat="server" Width="320"></asp:TextBox>                        
+                        <asp:TextBox ID="txt_search" runat="server" Width="320" class="form-control"></asp:TextBox>                        
                     </td>
                 </tr>
                 <tr>
@@ -280,7 +280,7 @@
                     <asp:BoundField DataField="FILE_VERSION" HeaderText="File Version" />
                     <asp:BoundField DataField="FILE_SIZE" HeaderText="File Size" />
                     <asp:BoundField DataField="UPLOAD_BY" HeaderText="Upload By" />
-                    <asp:BoundField DataField="UPLOAD_DATE" HeaderText="Upload Date" />
+                    <asp:BoundField DataField="UPLOAD_DATE" HeaderText="Upload Date" DataFormatString="{0:dd-MMM-yyyy}"/>
                     <asp:hyperlinkfield text="Edit"
                     DataNavigateUrlFields="ID"
                     DataNavigateUrlFormatString ="UploadFilesEdit.aspx?ID={0}"           

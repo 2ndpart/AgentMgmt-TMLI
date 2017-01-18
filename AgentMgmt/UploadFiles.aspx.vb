@@ -23,100 +23,72 @@ Public Class UploadFiles
     End Sub
 
     Protected Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        Try
-            If myFile.HasFile Then
-                Dim iUploadedCnt As Integer = 0
-                Dim iFailedCnt As Integer = 0
-                Dim hfc As HttpFileCollection = Request.Files
+        If ddl_select_folder.SelectedIndex <= 0 Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select folder');", True)
+        ElseIf txt_version.Text = "" Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Version cannot be empty');", True)
+        Else
+            Try
+                If myFile.HasFile Then
+                    Dim iUploadedCnt As Integer = 0
+                    Dim iFailedCnt As Integer = 0
+                    Dim hfc As HttpFileCollection = Request.Files
 
-                'lblFileList.Text = "Select <b>" & hfc.Count & "</b> file(s)"
+                    'lblFileList.Text = "Select <b>" & hfc.Count & "</b> file(s)"
 
-                If hfc.Count <= 10 Then             ' 10 FILES RESTRICTION.
-                    For i As Integer = 0 To hfc.Count - 1
-                        Dim hpf As HttpPostedFile = hfc(i)
-                        If hpf.ContentLength > 0 Then
-                            Dim strFIleName As String = ""
-                            strFIleName = myFile.FileName
-                            Dim intFileSize As Int64
-                            intFileSize = myFile.PostedFile.ContentLength
-                            Dim strSubFolder As String = ""
+                    If hfc.Count <= 10 Then             ' 10 FILES RESTRICTION.
+                        For i As Integer = 0 To hfc.Count - 1
+                            Dim hpf As HttpPostedFile = hfc(i)
+                            If hpf.ContentLength > 0 Then
+                                Dim strFIleName As String = ""
+                                strFIleName = hpf.FileName
+                                Dim intFileSize As Int64
+                                intFileSize = hpf.ContentLength
+                                Dim strSubFolder As String = ""
 
-                            If ddl_select_sub_folder.SelectedIndex > 0 Then
-                                strSubFolder = ddl_select_sub_folder.SelectedValue
+                                If ddl_select_sub_folder.SelectedIndex > 0 Then
+                                    strSubFolder = ddl_select_sub_folder.SelectedItem.Text + "\"
+                                End If
+
+                                myFile.PostedFile.SaveAs(folderName + ddl_select_folder.SelectedItem.Text + "\" + strSubFolder + strFIleName)
+
+                                Dim conn As New SqlConnection
+                                conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
+
+                                conn.Open()
+
+                                Dim insertCommand As New SqlCommand("INSERT INTO FILE_UPLOAD ([FOLDER_NAME], [FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FILE_PATH], [FILE_NAME], [FILE_SIZE], [FILE_VERSION], [UPLOAD_BY], [UPLOAD_DATE]) VALUES (@FOLDER_NAME, @FOLDER_PARENT_ID, @FOLDER_SELF_ID, @SUB_FOLDER_NAME, @FILE_PATH, @FILE_NAME, @FILE_SIZE, @FILE_VERSION, @UPLOAD_BY, GETDATE())", conn)
+
+                                insertCommand.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
+                                insertCommand.Parameters.AddWithValue("@FOLDER_PARENT_ID", ddl_select_folder.SelectedValue)
+                                insertCommand.Parameters.AddWithValue("@FOLDER_SELF_ID", IIf(ddl_select_sub_folder.SelectedIndex > 0, ddl_select_sub_folder.SelectedValue, 0))
+                                insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder.Replace("\", ""))
+                                insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + ddl_select_folder.SelectedItem.Text + "\" + strSubFolder)
+                                insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
+                                insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
+                                insertCommand.Parameters.AddWithValue("@FILE_VERSION", txt_version.Text.Trim)
+                                insertCommand.Parameters.AddWithValue("@UPLOAD_BY", "")
+
+                                insertCommand.ExecuteNonQuery()
+
+                                conn.Close()
                             End If
-
-                            myFile.PostedFile.SaveAs(folderName + ddl_select_folder.SelectedValue + "/" + strSubFolder + "/" + strFIleName)
-
-                            Dim conn As New SqlConnection
-                            conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
-
-                            conn.Open()
-
-                            Dim insertCommand As New SqlCommand("INSERT INTO FILE_UPLOAD ([FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_PATH], [FILE_NAME], [FILE_SIZE], [CREATED_BY], [CREATED_DATE]) VALUES (@FOLDER_NAME, @SUB_FOLDER_NAME, @FILE_PATH, @FILE_NAME, @FILE_SIZE, @CREATED_BY, GETDATE())", conn)
-
-                            insertCommand.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedValue)
-                            insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder)
-                            insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + ddl_select_folder.SelectedValue + "/" + strSubFolder + "/")
-                            insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
-                            insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
-                            insertCommand.Parameters.AddWithValue("@CREATED_BY", "")
-
-                            insertCommand.ExecuteNonQuery()
-
-                            conn.Close()
-                        End If
-                    Next i
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
-                    'lblUploadStatus.Text = "<b>" & iUploadedCnt & "</b> file(s) Uploaded."
-                    'lblFailedStatus.Text = "<b>" & iFailedCnt &
-                    '"</b> duplicate file(s) could not be uploaded."
+                        Next i
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
+                        FillGrid()
+                        'lblUploadStatus.Text = "<b>" & iUploadedCnt & "</b> file(s) Uploaded."
+                        'lblFailedStatus.Text = "<b>" & iFailedCnt &
+                        '"</b> duplicate file(s) could not be uploaded."
+                    Else
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Masximum 10 files to upload');", True)
+                    End If
                 Else
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Masximum 10 files to upload');", True)
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
                 End If
-            Else
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
-            End If
-            '    If myFile.HasFile Then
-            '        Dim strFIleName As String = ""
-            '        strFIleName = myFile.FileName
-            '        Dim intFileSize As Int64
-            '        intFileSize = myFile.PostedFile.ContentLength
-            '        Dim strSubFolder As String = ""
-
-            '        If ddl_select_sub_folder.SelectedIndex > 0 Then
-            '            strSubFolder = ddl_select_sub_folder.SelectedValue
-            '        End If
-
-            '        myFile.PostedFile.SaveAs(folderName + ddl_select_folder.SelectedValue + "/" + strSubFolder + strFIleName)
-
-            '        Dim conn As New SqlConnection
-            '        conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
-
-            '        conn.Open()
-
-            '        'Dim updateStatement As String = SqlCommand("UPDATE TMLI_TBM_FundHouse SET FundHouseDescription=@desc, FundDefaultSelected=@default, SortOrder=@order, Active=@active WHERE SubChannelCode='" + txtCode.Text + "'", conn);
-
-            '        Dim insertCommand As New SqlCommand("INSERT INTO FILE_UPLOAD ([FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_PATH], [FILE_NAME], [FILE_SIZE], [CREATED_BY], [CREATED_DATE]) VALUES (@FOLDER_NAME, @SUB_FOLDER_NAME, @FILE_PATH, @FILE_NAME, @FILE_SIZE, @CREATED_BY, GETDATE())", conn)
-
-            '        insertCommand.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedValue)
-            '        insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder)
-            '        insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + ddl_select_folder.SelectedValue + "/" + strSubFolder + "/")
-            '        insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
-            '        insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
-            '        insertCommand.Parameters.AddWithValue("@CREATED_BY", "")
-
-            '        insertCommand.ExecuteNonQuery()
-
-            '        conn.Close()
-
-            '        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
-            '    Else
-            '        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
-            '    End If
-        Catch ex As Exception
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
-        End Try
-        FillGrid()
+            Catch ex As Exception
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
+            End Try
+        End If
     End Sub
 
     Private Sub FillGrid()
@@ -145,6 +117,8 @@ Public Class UploadFiles
     Protected Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
+        Dim folderSelfId As String = ""
+        Dim folderParentId As String = ""
         Dim folder As String = ""
         Dim subFolder As String = ""
         Dim filePath As String = ""
@@ -163,13 +137,15 @@ Public Class UploadFiles
                             Dim conn As New SqlConnection
                             conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
-                            Dim query As String = "SELECT FILE_PATH, FOLDER_NAME, SUB_FOLDER_NAME, FILE_NAME FROM FILE_UPLOAD WHERE ID = @ID"
+                            Dim query As String = "SELECT FOLDER_PARENT_ID, FOLDER_SELF_ID, FILE_PATH, FOLDER_NAME, SUB_FOLDER_NAME, FILE_NAME FROM FILE_UPLOAD WHERE ID = @ID"
                             Dim command1 As New SqlCommand(query, conn)
                             conn.Open()
                             command1.Parameters.AddWithValue("@ID", id)
                             Dim reader1 As SqlDataReader = command1.ExecuteReader()
 
                             While reader1.Read()
+                                folderParentId = (reader1("FOLDER_PARENT_ID").ToString())
+                                folderSelfId = (reader1("FOLDER_SELF_ID").ToString())
                                 filePath = (reader1("FILE_PATH").ToString())
                                 folder = (reader1("FOLDER_NAME").ToString())
                                 subFolder = (reader1("SUB_FOLDER_NAME").ToString())
@@ -179,17 +155,62 @@ Public Class UploadFiles
                             reader1.Close()
                             conn.Close()
 
-                            Dim deleteStatement As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE [ID]='") & id) + "'"
-                            Dim command As New SqlCommand(deleteStatement)
-                            If objDBCom.ExecuteSQL(deleteStatement) Then
-                                If fileName <> "" Then
+                            If fileName <> "" Then
+                                Dim deleteStatement As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE [ID]='") & id) + "'"
+                                Dim command As New SqlCommand(deleteStatement)
+
+                                If objDBCom.ExecuteSQL(deleteStatement) Then
                                     File.Delete(filePath + fileName)
                                 Else
-                                    Directory.Delete(folderName + folder + "/" + subFolder, True)
+                                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error delete data');", True)
                                 End If
-                            Else
-                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error delete data');", True)
+                            ElseIf subFolder <> "" Then
+                                Dim deleteStatement As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE [ID]='") & id) + "'"
+                                Dim command As New SqlCommand(deleteStatement)
+
+                                Dim deleteStatement2 As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE FOLDER_PARENT_ID <> 0 AND [FOLDER_SELF_ID]='") & folderSelfId) + "'"
+                                Dim command2 As New SqlCommand(deleteStatement2)
+
+                                Dim deleteStatement3 As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD_FOLDER] WHERE FOLDER_LEVEL = 2 AND [FOLDER_SELF_ID]='") & folderSelfId) + "'"
+                                Dim command3 As New SqlCommand(deleteStatement3)
+
+                                If objDBCom.ExecuteSQL(deleteStatement) Then
+                                    If objDBCom.ExecuteSQL(deleteStatement2) Then
+                                        If objDBCom.ExecuteSQL(deleteStatement3) Then
+                                            If Directory.Exists(folderName + folder + "\" + subFolder) Then
+                                                Directory.Delete(folderName + folder + "\" + subFolder, True)
+                                            End If
+                                        End If
+                                    End If
+                                Else
+                                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error delete data');", True)
+                                End If
+                            ElseIf folder <> "" Then
+                                Dim deleteStatement As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE [ID]='") & id) + "'"
+                                Dim command As New SqlCommand(deleteStatement)
+
+                                Dim deleteStatement2 As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD] WHERE [FOLDER_PARENT_ID] <> 0 AND [FOLDER_PARENT_ID]='") & folderSelfId) + "'"
+                                Dim command2 As New SqlCommand(deleteStatement2)
+
+                                Dim deleteStatement3 As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD_FOLDER] WHERE FOLDER_LEVEL = 1 AND [FOLDER_SELF_ID]='") & folderSelfId) + "'"
+                                Dim command3 As New SqlCommand(deleteStatement3)
+
+                                Dim deleteStatement4 As String = (Convert.ToString("DELETE FROM [FILE_UPLOAD_FOLDER] WHERE [FOLDER_PARENT_ID] <> 0 AND FOLDER_LEVEL = 2 AND [FOLDER_PARENT_ID]='") & folderSelfId) + "'"
+                                Dim command4 As New SqlCommand(deleteStatement4)
+
+                                If objDBCom.ExecuteSQL(deleteStatement) Then
+                                    If objDBCom.ExecuteSQL(deleteStatement2) Then
+                                        If objDBCom.ExecuteSQL(deleteStatement3) Then
+                                            If objDBCom.ExecuteSQL(deleteStatement4) Then
+                                                Directory.Delete(folderName + folder, True)
+                                            End If
+                                        End If
+                                    End If
+                                Else
+                                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error delete data');", True)
+                                End If
                             End If
+
                         Catch ex As Exception
                             'LogWriter.WriteLog(Me.[GetType]().FullName + " : " + ex.Message)
                         End Try
@@ -198,6 +219,7 @@ Public Class UploadFiles
             End If
         Next
         FillGrid()
+        loadFolder()
         loadSubFolder()
     End Sub
 
@@ -249,11 +271,6 @@ Public Class UploadFiles
                     'Console.WriteLine("That path exists already.")
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder already exists');", True)
                 Else
-                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
-
-                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_NAME]) VALUES (@FOLDER_NAME_1)"
-                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
-
                     Dim conn As New SqlConnection
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
@@ -278,6 +295,11 @@ Public Class UploadFiles
                     End If
 
                     conn.Close()
+
+                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+
+                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [FOLDER_NAME]) VALUES (0, " + folderSelfId.ToString() + ", @FOLDER_NAME_1)"
+                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
 
                     Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL]) VALUES (@FOLDER_NAME_2, " + folderSelfId.ToString() + ", 1)"
                     objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text.Trim)
@@ -316,12 +338,6 @@ Public Class UploadFiles
                     'Console.WriteLine("That path exists already.")
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder already exists');", True)
                 Else
-                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
-
-                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (@SUB_FOLDER_NAME_1, @FOLDER_NAME)"
-                    objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
-                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
-
                     Dim conn As New SqlConnection
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
@@ -346,6 +362,12 @@ Public Class UploadFiles
                     End If
 
                     conn.Close()
+
+                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+
+                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + ddl_select_folder.SelectedValue + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
+                    objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
+                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
 
                     Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + ddl_select_folder.SelectedValue + ")"
                     objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)

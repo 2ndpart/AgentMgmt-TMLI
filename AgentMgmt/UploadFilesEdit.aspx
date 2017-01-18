@@ -26,7 +26,7 @@
                 Folder Name</td>
             <td>
                 <asp:TextBox ID="txt_folder_name" class="form-control" runat="server" 
-                    ReadOnly="True" Width="400px" disabled></asp:TextBox>
+                    ReadOnly="True" Width="400px"></asp:TextBox>
             </td>
             <td>
                 &nbsp;</td>
@@ -44,7 +44,7 @@
                 Sub Folder Name
              </td>
             <td>
-                <asp:TextBox ID="txt_sub_folder_name" class="form-control" runat="server" Width="400px"></asp:TextBox>
+                <asp:TextBox ID="txt_sub_folder_name" class="form-control" runat="server" Width="400px" ReadOnly="True"></asp:TextBox>
             </td>
             <td>
                 &nbsp;</td>
@@ -62,7 +62,7 @@
                 File Name</td>
             <td>
                 <asp:TextBox ID="txt_file_name" class="form-control" runat="server"
-                    Width="400px"></asp:TextBox>
+                    Width="400px" ReadOnly="True"></asp:TextBox>
             </td>
             <td>
                 &nbsp;</td>

@@ -5,6 +5,7 @@ Public Class UploadFilesEdit
     Inherits System.Web.UI.Page
 
     Dim webRootPath As String = ConfigurationManager.AppSettings("ServerRootPathTMLI").ToString()
+    'Dim webRootPath As String = ConfigurationManager.AppSettings("ServerRootPathIFC").ToString()
     Dim conf As String = ConfigurationManager.AppSettings("ProductRoot").ToString()
     Dim folderName As String = Path.Combine(webRootPath, conf)
 
@@ -17,7 +18,7 @@ Public Class UploadFilesEdit
                     Dim conn As New SqlConnection
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
-                    Dim query As String = "SELECT FOLDER_NAME, SUB_FOLDER_NAME, FILE_NAME FROM FILE_UPLOAD WHERE ID = @ID"
+                    Dim query As String = "SELECT FOLDER_NAME, SUB_FOLDER_NAME, FILE_NAME, FOLDER_SELF_ID FROM FILE_UPLOAD WHERE ID = @ID"
                     Dim command1 As New SqlCommand(query, conn)
                     conn.Open()
                     command1.Parameters.AddWithValue("@ID", ID)
@@ -27,7 +28,8 @@ Public Class UploadFilesEdit
                         txt_folder_name.Text = (reader1("FOLDER_NAME").ToString())
                         txt_sub_folder_name.Text = (reader1("SUB_FOLDER_NAME").ToString())
                         txt_file_name.Text = (reader1("FILE_NAME").ToString())
-                        Session("Folder") = (reader1("FOLDER_NAME").ToString())
+                        Session("folderSelfId") = (reader1("FOLDER_SELF_ID").ToString())
+                        Session("oldFolder") = (reader1("FOLDER_NAME").ToString())
                         Session("oldSubFolder") = (reader1("SUB_FOLDER_NAME").ToString())
                         Session("oldFileName") = (reader1("FILE_NAME").ToString())
                     End While
@@ -36,14 +38,19 @@ Public Class UploadFilesEdit
                     conn.Close()
 
                     If txt_file_name.Text <> "" Then
+                        Session("sts") = 3
+                        txt_file_name.ReadOnly = False
+                    ElseIf txt_sub_folder_name.Text <> "" Then
                         Session("sts") = 2
-                        txt_sub_folder_name.Enabled = False
-                    Else
+                        txt_sub_folder_name.ReadOnly = False
+                    ElseIf txt_folder_name.Text <> "" Then
                         Session("sts") = 1
-                        txt_file_name.Enabled = False
+                        txt_folder_name.ReadOnly = False
+                    Else
+
                     End If
                 Catch ex As Exception
-                    'LogWriter.WriteLog(Me.[GetType]().FullName + " : " + ex.Message)
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error edit data');", True)
                 End Try
             End If
         End If
@@ -55,23 +62,36 @@ Public Class UploadFilesEdit
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Session("sts") = 1 Then
-            If txt_sub_folder_name.Text = "" Then
+            If txt_folder_name.Text = "" Then
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot be empty');", True)
             Else
                 Try
-                    FileSystem.Rename(folderName + Session("Folder") + "\" + Session("oldSubFolder"), folderName + Session("Folder") + "\" + txt_sub_folder_name.Text)
+                    FileSystem.Rename(folderName + Session("oldFolder"), folderName + txt_folder_name.Text)
 
                     Dim conn As New SqlConnection
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
                     conn.Open()
 
-                    Dim updateStatement As New SqlCommand("UPDATE FILE_UPLOAD SET SUB_FOLDER_NAME=@SUB_FOLDER_NAME, UPDATED_BY=@UPDATED_BY, UPDATED_DATE=GETDATE() WHERE ID=@ID", conn)
+                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET FOLDER_NAME=@FOLDER_NAME, UPDATED_BY=@UPDATED_BY, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID", conn)
 
-                    updateStatement.Parameters.AddWithValue("@ID", Request.QueryString("ID"))
-                    updateStatement.Parameters.AddWithValue("@SUB_FOLDER_NAME", txt_sub_folder_name.Text)
-                    updateStatement.Parameters.AddWithValue("@UPDATED_BY", "")
+                    Dim updateStatement2 As New SqlCommand("UPDATE FILE_UPLOAD_FOLDER SET FOLDER_NAME=@FOLDER_NAME_2 WHERE FOLDER_LEVEL = 1 AND FOLDER_SELF_ID=" + Session("folderSelfId"), conn)
 
-                    updateStatement.ExecuteNonQuery()
+                    Dim updateStatement3 As New SqlCommand("UPDATE FILE_UPLOAD SET FOLDER_NAME=@FOLDER_NAME_3, UPDATED_BY=@UPDATED_BY_3, UPDATED_DATE=GETDATE() WHERE FOLDER_PARENT_ID=@FOLDER_PARENT_ID", conn)
+
+                    updateStatement1.Parameters.AddWithValue("@FOLDER_SELF_ID", Session("folderSelfId"))
+                    updateStatement1.Parameters.AddWithValue("@FOLDER_NAME", txt_folder_name.Text)
+                    updateStatement1.Parameters.AddWithValue("@UPDATED_BY", "")
+
+                    updateStatement2.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text)
+                    updateStatement2.Parameters.AddWithValue("@UPDATED_BY_2", "")
+
+                    updateStatement3.Parameters.AddWithValue("@FOLDER_PARENT_ID", Session("folderSelfId"))
+                    updateStatement3.Parameters.AddWithValue("@FOLDER_NAME_3", txt_folder_name.Text)
+                    updateStatement3.Parameters.AddWithValue("@UPDATED_BY_3", "")
+
+                    updateStatement1.ExecuteNonQuery()
+                    updateStatement2.ExecuteNonQuery()
+                    updateStatement3.ExecuteNonQuery()
 
                     conn.Close()
 
@@ -82,11 +102,45 @@ Public Class UploadFilesEdit
                 End Try
             End If
         ElseIf Session("sts") = 2 Then
+            If txt_sub_folder_name.Text = "" Then
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder name cannot be empty');", True)
+            Else
+                Try
+                    FileSystem.Rename(folderName + Session("oldFolder") + "\" + Session("oldSubFolder"), folderName + Session("oldFolder") + "\" + txt_sub_folder_name.Text)
+
+                    Dim conn As New SqlConnection
+                    conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
+                    conn.Open()
+
+                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET SUB_FOLDER_NAME=@SUB_FOLDER_NAME, UPDATED_BY=@UPDATED_BY_1, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID", conn)
+
+                    Dim updateStatement2 As New SqlCommand("UPDATE FILE_UPLOAD_FOLDER SET FOLDER_NAME=@FOLDER_NAME_2 WHERE FOLDER_LEVEL = 2 AND FOLDER_SELF_ID=" + Session("folderSelfId"), conn)
+
+                    updateStatement1.Parameters.AddWithValue("@FOLDER_SELF_ID", Session("folderSelfId"))
+                    updateStatement1.Parameters.AddWithValue("@SUB_FOLDER_NAME", txt_sub_folder_name.Text)
+                    updateStatement1.Parameters.AddWithValue("@FOLDER_NAME_1", Session("oldFolder"))
+                    updateStatement1.Parameters.AddWithValue("@UPDATED_BY_1", "")
+
+                    updateStatement2.Parameters.AddWithValue("@FOLDER_NAME_2", txt_sub_folder_name.Text)
+                    updateStatement2.Parameters.AddWithValue("@UPDATED_BY_2", "")
+
+                    updateStatement1.ExecuteNonQuery()
+                    updateStatement2.ExecuteNonQuery()
+
+                    conn.Close()
+
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Edit sub folder success');", True)
+                    Response.Redirect("~\UploadFiles.aspx")
+                Catch ex As Exception
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error edit sub folder');", True)
+                End Try
+            End If
+        ElseIf Session("sts") = 3 Then
             If txt_file_name.Text = "" Then
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File name cannot be empty');", True)
             Else
                 Try
-                    FileSystem.Rename(folderName + Session("Folder") + "\" + Session("oldSubFolder") + "\" + Session("oldFileName"), folderName + Session("Folder") + "\" + Session("oldSubFolder") + "\" + txt_file_name.Text)
+                    FileSystem.Rename(folderName + Session("oldFolder") + "\" + Session("oldSubFolder") + "\" + Session("oldFileName"), folderName + Session("oldFolder") + "\" + Session("oldSubFolder") + "\" + txt_file_name.Text.Trim)
 
                     Dim conn As New SqlConnection
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
@@ -102,10 +156,10 @@ Public Class UploadFilesEdit
 
                     conn.Close()
 
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Edit file success');", True)
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Edit sub folder success');", True)
                     Response.Redirect("~\UploadFiles.aspx")
                 Catch ex As Exception
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error edit file');", True)
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error edit sub folder');", True)
                 End Try
             End If
         End If
