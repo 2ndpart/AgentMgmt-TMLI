@@ -264,65 +264,69 @@ Public Class UploadFiles
     Protected Sub btn_create_folder_Click(sender As Object, e As EventArgs) Handles btn_create_folder.Click
         If txt_folder_name.Text.Trim = "" Then
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot be empty');", True)
-        Else
-            Try
-                ' Determine whether the directory exists.
-                If Directory.Exists(folderName + txt_folder_name.Text.Trim) Then
-                    'Console.WriteLine("That path exists already.")
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder already exists');", True)
-                Else
-                    Dim conn As New SqlConnection
-                    conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
+        ElseIf txt_folder_name.Text.Trim <> "" Then
+            If Not FolderNameIsOK(txt_folder_name.Text.Trim) Then
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot contain special char');", True)
+            Else
+                Try
+                    ' Determine whether the directory exists.
+                    If Directory.Exists(folderName + txt_folder_name.Text.Trim) Then
+                        'Console.WriteLine("That path exists already.")
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder already exists');", True)
+                    Else
+                        Dim conn As New SqlConnection
+                        conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
-                    Dim query As String = "SELECT * FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 1"
+                        Dim query As String = "SELECT * FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 1"
 
-                    Dim count As Integer = 0
-                    Dim folderSelfId As Integer = 1
+                        Dim count As Integer = 0
+                        Dim folderSelfId As Integer = 1
 
-                    Dim command1 As New SqlCommand(query, conn)
-                    conn.Open()
+                        Dim command1 As New SqlCommand(query, conn)
+                        conn.Open()
 
-                    count = command1.ExecuteScalar()
+                        count = command1.ExecuteScalar()
 
-                    If count > 0 Then
-                        Dim query2 As String = "SELECT MAX(FOLDER_SELF_ID) + 1 AS FOLDER_SELF_ID FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 1"
-                        Dim command2 As New SqlCommand(query2, conn)
-                        Dim reader1 As SqlDataReader = command2.ExecuteReader()
-                        While reader1.Read()
-                            folderSelfId = (reader1("FOLDER_SELF_ID"))
-                        End While
-                        reader1.Close()
-                    End If
+                        If count > 0 Then
+                            Dim query2 As String = "SELECT MAX(FOLDER_SELF_ID) + 1 AS FOLDER_SELF_ID FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 1"
+                            Dim command2 As New SqlCommand(query2, conn)
+                            Dim reader1 As SqlDataReader = command2.ExecuteReader()
+                            While reader1.Read()
+                                folderSelfId = (reader1("FOLDER_SELF_ID"))
+                            End While
+                            reader1.Close()
+                        End If
 
-                    conn.Close()
+                        conn.Close()
 
-                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+                        Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
-                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [FOLDER_NAME]) VALUES (0, " + folderSelfId.ToString() + ", @FOLDER_NAME_1)"
-                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
+                        Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [FOLDER_NAME]) VALUES (0, " + folderSelfId.ToString() + ", @FOLDER_NAME_1)"
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
 
-                    Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL]) VALUES (@FOLDER_NAME_2, " + folderSelfId.ToString() + ", 1)"
-                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text.Trim)
+                        Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL]) VALUES (@FOLDER_NAME_2, " + folderSelfId.ToString() + ", 1)"
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text.Trim)
 
-                    If objDBCom.ExecuteSQL(insertFolderStatement1) Then
-                        If objDBCom.ExecuteSQL(insertFolderStatement2) Then
-                            Directory.CreateDirectory(folderName + txt_folder_name.Text.Trim)
-                            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
-                            loadFolder()
-                            FillGrid()
-                            txt_folder_name.Text = String.Empty
+                        If objDBCom.ExecuteSQL(insertFolderStatement1) Then
+                            If objDBCom.ExecuteSQL(insertFolderStatement2) Then
+                                Directory.CreateDirectory(folderName + txt_folder_name.Text.Trim)
+                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
+                                loadFolder()
+                                FillGrid()
+                                txt_folder_name.Text = String.Empty
+                            Else
+                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                            End If
                         Else
                             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                         End If
-                    Else
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                     End If
-                End If
 
-            Catch ex As Exception
-                'Console.WriteLine("The process failed: {0}.", ex.ToString())
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
-            End Try
+                Catch ex As Exception
+                    'Console.WriteLine("The process failed: {0}.", ex.ToString())
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                End Try
+            End If
         End If
     End Sub
 
@@ -331,70 +335,85 @@ Public Class UploadFiles
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select folder');", True)
         ElseIf txt_sub_folder_name.Text.Trim = "" Then
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder name cannot be empty');", True)
-        Else
-            Try
-                ' Determine whether the directory exists.
-                If Directory.Exists(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim) Then
-                    'Console.WriteLine("That path exists already.")
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder already exists');", True)
-                Else
-                    Dim conn As New SqlConnection
-                    conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
+        ElseIf txt_sub_folder_name.Text.Trim <> "" Then
+            If Not FolderNameIsOK(txt_sub_folder_name.Text.Trim) Then
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot contain special char');", True)
+            Else
+                Try
+                    ' Determine whether the directory exists.
+                    If Directory.Exists(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim) Then
+                        'Console.WriteLine("That path exists already.")
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder already exists');", True)
+                    Else
+                        Dim conn As New SqlConnection
+                        conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
 
-                    Dim query As String = "SELECT * FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 2"
+                        Dim query As String = "SELECT * FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 2"
 
-                    Dim count As Integer = 0
-                    Dim folderSelfId As Integer = 1
+                        Dim count As Integer = 0
+                        Dim folderSelfId As Integer = 1
 
-                    Dim command1 As New SqlCommand(query, conn)
-                    conn.Open()
+                        Dim command1 As New SqlCommand(query, conn)
+                        conn.Open()
 
-                    count = command1.ExecuteScalar()
+                        count = command1.ExecuteScalar()
 
-                    If count > 0 Then
-                        Dim query2 As String = "SELECT MAX(FOLDER_SELF_ID) + 1 AS FOLDER_SELF_ID FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 2"
-                        Dim command2 As New SqlCommand(query2, conn)
-                        Dim reader1 As SqlDataReader = command2.ExecuteReader()
-                        While reader1.Read()
-                            folderSelfId = (reader1("FOLDER_SELF_ID"))
-                        End While
-                        reader1.Close()
-                    End If
+                        If count > 0 Then
+                            Dim query2 As String = "SELECT MAX(FOLDER_SELF_ID) + 1 AS FOLDER_SELF_ID FROM FILE_UPLOAD_FOLDER WHERE FOLDER_LEVEL = 2"
+                            Dim command2 As New SqlCommand(query2, conn)
+                            Dim reader1 As SqlDataReader = command2.ExecuteReader()
+                            While reader1.Read()
+                                folderSelfId = (reader1("FOLDER_SELF_ID"))
+                            End While
+                            reader1.Close()
+                        End If
 
-                    conn.Close()
+                        conn.Close()
 
-                    Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+                        Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
-                    Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + ddl_select_folder.SelectedValue + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
-                    objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
-                    objDBCom.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
+                        Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + ddl_select_folder.SelectedValue + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
+                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
 
-                    Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + ddl_select_folder.SelectedValue + ")"
-                    objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)
+                        Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + ddl_select_folder.SelectedValue + ")"
+                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)
 
-                    If objDBCom.ExecuteSQL(insertFolderStatement1) Then
-                        If objDBCom.ExecuteSQL(insertFolderStatement2) Then
-                            Directory.CreateDirectory(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim)
-                            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
-                            loadSubFolder()
-                            FillGrid()
-                            txt_sub_folder_name.Text = String.Empty
+                        If objDBCom.ExecuteSQL(insertFolderStatement1) Then
+                            If objDBCom.ExecuteSQL(insertFolderStatement2) Then
+                                Directory.CreateDirectory(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim)
+                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
+                                loadSubFolder()
+                                FillGrid()
+                                txt_sub_folder_name.Text = String.Empty
+                            Else
+                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                            End If
                         Else
                             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                         End If
-                    Else
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                     End If
-                End If
 
-            Catch ex As Exception
-                'Console.WriteLine("The process failed: {0}.", ex.ToString())
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
-            End Try
+                Catch ex As Exception
+                    'Console.WriteLine("The process failed: {0}.", ex.ToString())
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                End Try
+            End If
         End If
     End Sub
 
     Protected Sub btn_search_Click(sender As Object, e As EventArgs) Handles btn_search.Click
         FillGrid()
     End Sub
+    Public Shared Function FolderNameIsOK(ByVal folderName As String) As Boolean
+        Dim reserved As Char() = Path.GetInvalidFileNameChars()
+
+        For Each c As Char In reserved
+            If folderName.Contains(c) Then
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
 End Class
