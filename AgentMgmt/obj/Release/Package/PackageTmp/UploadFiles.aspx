@@ -18,7 +18,7 @@
         $(document).ready(function ()
         {
             
-        });
+        });        
 
         function toggleFormDetail(stringRowSelectedJavaScriptClass, stringRowGroupJavaScriptClass)
         {
@@ -124,15 +124,12 @@
         </Triggers>
         <ContentTemplate>
             <h2>                
-                Upload Files</h2>
+                E - Library</h2>
             <table class="nav-justified">
                 <tr>
                     <td width="240">Select Folder</td>
                     <td>
-                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px">
-                            <asp:ListItem Value="ProductBrochure">Product Brochure</asp:ListItem>
-                            <asp:ListItem Value="TrainingVideo">Training Video</asp:ListItem>
-                            <asp:ListItem Value="CompanyVideo">Company Video</asp:ListItem>                            
+                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px">                                                 
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -166,8 +163,39 @@
                 </tr>
                 <tr class="RowFormFile RowFormDetail">                    
                     <td>Select File</td>
-                    <td><asp:FileUpload ID="myFile" runat="server" /></td>
+                    <td>
+                        <asp:FileUpload ID="myFile" runat="server" multiple="true"/>
+                        <%--<ajaxToolkit:AjaxFileUpload ID="myFile" runat="server" MaximumNumberOfFiles="10" />--%>
+                    </td>
                 </tr>                            
+                <tr>                    
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="RowFormFile RowFormDetail">                    
+                    <td>File Version</td>
+                    <td>
+                        <asp:TextBox ID="txt_version" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>                    
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="RowFormFolder RowFormDetail">                    
+                    <td>Create Folder Name</td>
+                    <td><asp:TextBox ID="txt_folder_name" runat="server" class="form-control" Width="300px"></asp:TextBox></td>
+                </tr>
+                <tr>                    
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="RowFormFolder RowFormDetail">                    
+                    <td>
+                        <asp:Button ID="btn_create_folder" runat="server" Text="Create Folder" />
+                    </td>
+                    <td></td>
+                </tr>
                 <tr>                    
                     <td></td>
                     <td></td>
@@ -228,7 +256,7 @@
                     <ProgressTemplate>
                         <asp:Label ID="lblWait" runat="server" BackColor="#507CD1" 
                             Font-Bold="True" ForeColor="White" 
-                            Text="Please wait ... Uploading file"></asp:Label>
+                            Text=""></asp:Label>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </table>
@@ -249,7 +277,10 @@
                     <asp:BoundField DataField="FOLDER_NAME" HeaderText="Folder Name" />
                     <asp:BoundField DataField="SUB_FOLDER_NAME" HeaderText="Sub Folder Name" />
                     <asp:BoundField DataField="FILE_NAME" HeaderText="File Name" />
+                    <asp:BoundField DataField="FILE_VERSION" HeaderText="File Version" />
                     <asp:BoundField DataField="FILE_SIZE" HeaderText="File Size" />
+                    <asp:BoundField DataField="UPLOAD_BY" HeaderText="Upload By" />
+                    <asp:BoundField DataField="UPLOAD_DATE" HeaderText="Upload Date" />
                     <asp:hyperlinkfield text="Edit"
                     DataNavigateUrlFields="ID"
                     DataNavigateUrlFormatString ="UploadFilesEdit.aspx?ID={0}"           

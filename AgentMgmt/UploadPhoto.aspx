@@ -252,9 +252,9 @@
             <tr>
                 <td>
                     <br />
-                    <asp:Image runat="server" ID="imgPreview10" Height="72px" Width="98px" onchange="ShowImagePreviewFileUpload10(this);"/>
+                    <asp:Image runat="server" ID="imgPreview10" Height="72px" Width="98px" />
                     <br />
-                    <asp:FileUpload ID="FileUpload10" runat="server" Width="423px" />
+                    <asp:FileUpload ID="FileUpload10" runat="server" Width="423px" onchange="ShowImagePreviewFileUpload10(this);"/>
                      
                 </td>
                 <td>

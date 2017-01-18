@@ -1629,27 +1629,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.Site._SPAJ_Submission_List">
-<summary>
-SPAJ_Submission_List control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:AgentMgmt.Site._STP_Rules_Table">
 <summary>
 STP_Rules_Table control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.Site._Product_Configurator">
-<summary>
-Product_Configurator control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1668,6 +1650,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.Site._Payment_Lsting">
 <summary>
 Payment_Lsting control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.Site._fooItem">
+<summary>
+fooItem control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1965,6 +1956,33 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.UploadFiles._myFile">
 <summary>
 myFile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version">
+<summary>
+txt_version control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_folder_name">
+<summary>
+txt_folder_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._btn_create_folder">
+<summary>
+btn_create_folder control.
 </summary>
 <remarks>
 Auto-generated field.

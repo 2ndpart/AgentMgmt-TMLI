@@ -131,15 +131,6 @@ Partial Public Class Site
     Protected WithEvents VA_Number_Listing As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''SPAJ_Submission_List control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SPAJ_Submission_List As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
     '''STP_Rules_Table control.
     '''</summary>
     '''<remarks>
@@ -147,15 +138,6 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents STP_Rules_Table As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Product_Configurator control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Product_Configurator As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TMCONNECT_Client_Photos control.
@@ -174,6 +156,15 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Payment_Lsting As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''fooItem control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fooItem As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''MainContent control.

@@ -338,10 +338,10 @@ Public Class AgentProfile
                     body = sr.ReadToEnd()
                 End Using
 
-                Dim ipadimage As String = "http://simpleicon.com/wp-content/uploads/ipad-portrait.png"
-                Dim desktopimage As String = "https://image.freepik.com/free-icon/desktop-button_318-25227.jpg"
+                Dim ipadimage As String = "http://tmconnect.tokiomarine-life.co.id/ipad.png"
+                Dim desktopimage As String = "http://tmconnect.tokiomarine-life.co.id/desktop.png"
                 Dim messageBody As String = String.Format(body, "https://tmconnect.tokiomarine-life.co.id/anvoaiwenvwae0v-wevjhweivnawuen12j3n12m%20asjkdfna%20sdjf%20123.html", ipadimage, "http://www.google.com",
-                                                      desktopimage, txt_Code.Text, encrypt.DecryptString(txt_pass.Text, "1234567891123456"))
+                                                      desktopimage, "<STRONG>Kode Agen Anda</STRONG>", encrypt.DecryptString(txt_pass.Text, "1234567891123456"))
 
                 Dim messageId = txt_Code.Text
                 Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(CStr(POSWeb.POSWeb_SQLConn))
@@ -495,7 +495,7 @@ Public Class AgentProfile
 
                         message.Subject = "Welcome"
                         message.Body = String.Format(body, agentname, "TMCONNECT", "http://www.google.com", ipadimage, "http://www.google.com",
-                            desktopimage, agentcode, password)
+                            desktopimage, "<STRONG>Kode Agen Anda</STRONG>", password)
                         message.IsBodyHtml = True
 
                         'message.IsBodyHtml = True

@@ -59,6 +59,33 @@ Partial Public Class UploadFiles
     Protected WithEvents myFile As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
+    '''txt_version control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_version As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txt_folder_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_folder_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btn_create_folder control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_create_folder As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''txt_sub_folder_name control.
     '''</summary>
     '''<remarks>

@@ -74,20 +74,23 @@
                 <li id="VA_Number_Listing" runat="server" visible="false">
                     <a href="#">VA Number Listing</a>
                 </li>
-                <li id="SPAJ_Submission_List" runat="server" visible="false">
+                <%--<li id="SPAJ_Submission_List" runat="server" visible="false">
                     <a href="SPAJSubmission.aspx">SPAJ Submission</a>
-                </li>
+                </li>--%>
                 <li id="STP_Rules_Table" runat="server" visible="false">
                     <a href="#">STP Rules Table</a>
                 </li>
-                <li id="Product_Configurator" runat="server" visible="false">
+                <%--<li id="Product_Configurator" runat="server" visible="false">
                     <a href="#">Product Configurator</a>
-                </li>
+                </li>--%>
                 <li id="TMCONNECT_Client_Photos" runat="server" visible="false">
                     <a href="UploadPhoto.aspx">TMCONNECT Client Photos</a>
                 </li>
                 <li id="Payment_Lsting" runat="server" visible="false">
                     <a href="#">Payment Listing</a>
+                </li>
+                <li id="fooItem" runat="server">
+                    <a href="UploadFiles.aspx">E-Library</a>
                 </li>
                 <%--<li id="fooItem" runat="server">
                     <a href="DeviceManagement.aspx">Device Management</a>
