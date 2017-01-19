@@ -21,6 +21,8 @@ Public Class AgentProfile
         pnl_showDetails.Visible = False
         If Not Me.IsPostBack Then
             If (Session("UserName") = String.Empty) Then
+                pnl_showDetails.Visible = False
+                pnl_showgridview.Visible = False
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please re-login through Login page.');window.location='../TMLI_MPOS/Login.aspx';", True)
             End If
             LoadAgentProfile(1)
