@@ -23,72 +23,81 @@ Public Class UploadFiles
     End Sub
 
     Protected Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        If ddl_select_folder.SelectedIndex <= 0 Then
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select folder');", True)
-        ElseIf txt_version.Text = "" Then
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Version cannot be empty');", True)
-        Else
-            Try
-                If myFile.HasFile Then
-                    Dim iUploadedCnt As Integer = 0
-                    Dim iFailedCnt As Integer = 0
-                    Dim hfc As HttpFileCollection = Request.Files
-
-                    'lblFileList.Text = "Select <b>" & hfc.Count & "</b> file(s)"
-
-                    If hfc.Count <= 10 Then             ' 10 FILES RESTRICTION.
-                        For i As Integer = 0 To hfc.Count - 1
-                            Dim hpf As HttpPostedFile = hfc(i)
-                            If hpf.ContentLength > 0 Then
-                                Dim strFIleName As String = ""
-                                strFIleName = hpf.FileName
-                                Dim intFileSize As Int64
-                                intFileSize = hpf.ContentLength
-                                Dim strSubFolder As String = ""
-
-                                If ddl_select_sub_folder.SelectedIndex > 0 Then
-                                    strSubFolder = ddl_select_sub_folder.SelectedItem.Text + "\"
-                                End If
-
-                                myFile.PostedFile.SaveAs(folderName + ddl_select_folder.SelectedItem.Text + "\" + strSubFolder + strFIleName)
-
-                                Dim conn As New SqlConnection
-                                conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
-
-                                conn.Open()
-
-                                Dim insertCommand As New SqlCommand("INSERT INTO FILE_UPLOAD ([FOLDER_NAME], [FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FILE_PATH], [FILE_NAME], [FILE_SIZE], [FILE_VERSION], [UPLOAD_BY], [UPLOAD_DATE]) VALUES (@FOLDER_NAME, @FOLDER_PARENT_ID, @FOLDER_SELF_ID, @SUB_FOLDER_NAME, @FILE_PATH, @FILE_NAME, @FILE_SIZE, @FILE_VERSION, @UPLOAD_BY, GETDATE())", conn)
-
-                                insertCommand.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
-                                insertCommand.Parameters.AddWithValue("@FOLDER_PARENT_ID", ddl_select_folder.SelectedValue)
-                                insertCommand.Parameters.AddWithValue("@FOLDER_SELF_ID", IIf(ddl_select_sub_folder.SelectedIndex > 0, ddl_select_sub_folder.SelectedValue, 0))
-                                insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder.Replace("\", ""))
-                                insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + ddl_select_folder.SelectedItem.Text + "\" + strSubFolder)
-                                insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
-                                insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
-                                insertCommand.Parameters.AddWithValue("@FILE_VERSION", txt_version.Text.Trim)
-                                insertCommand.Parameters.AddWithValue("@UPLOAD_BY", "")
-
-                                insertCommand.ExecuteNonQuery()
-
-                                conn.Close()
-                            End If
-                        Next i
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
-                        FillGrid()
-                        'lblUploadStatus.Text = "<b>" & iUploadedCnt & "</b> file(s) Uploaded."
-                        'lblFailedStatus.Text = "<b>" & iFailedCnt &
-                        '"</b> duplicate file(s) could not be uploaded."
-                    Else
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Masximum 10 files to upload');", True)
-                    End If
-                Else
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
-                End If
-            Catch ex As Exception
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
-            End Try
+        If Not CreateFolder() Then
+            Exit Sub
         End If
+
+        If Not CreateSubFolder() Then
+            Exit Sub
+        End If
+
+        Try
+            If myFile.HasFile Then
+                If txt_version.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile, txt_version.Text, 0)
+                End If
+            Else
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
+            End If
+
+            If myFile0.HasFile Then
+                If txt_version0.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile0, txt_version0.Text, 1)
+                End If
+            End If
+
+            If myFile1.HasFile Then
+                If txt_version1.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile1, txt_version1.Text, 2)
+                End If
+            End If
+
+            If myFile2.HasFile Then
+                If txt_version2.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile2, txt_version2.Text, 3)
+                End If
+            End If
+
+            If myFile3.HasFile Then
+                If txt_version3.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile3, txt_version3.Text, 4)
+                End If
+            End If
+
+            If myFile4.HasFile Then
+                If txt_version4.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile4, txt_version4.Text, 5)
+                End If
+            End If
+
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
+        Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
+        End Try
+
+        txt_folder_name.Text = ""
+        txt_sub_folder_name.Text = ""
+        ddl_select_folder.SelectedIndex = 0
+        ddl_select_sub_folder.SelectedIndex = 0
+        txt_version.Text = ""
+        txt_version0.Text = ""
+        txt_version1.Text = ""
+        txt_version2.Text = ""
+        txt_version3.Text = ""
+        txt_version4.Text = ""
+
     End Sub
 
     Private Sub FillGrid()
@@ -261,12 +270,14 @@ Public Class UploadFiles
         End Try
     End Sub
 
-    Protected Sub btn_create_folder_Click(sender As Object, e As EventArgs) Handles btn_create_folder.Click
+    Function CreateFolder() As Boolean
         If txt_folder_name.Text.Trim = "" Then
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot be empty');", True)
+            Return False
         ElseIf txt_folder_name.Text.Trim <> "" Then
             If Not FolderNameIsOK(txt_folder_name.Text.Trim) Then
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot contain special char');", True)
+                Return False
             Else
                 Try
                     ' Determine whether the directory exists.
@@ -310,10 +321,10 @@ Public Class UploadFiles
                         If objDBCom.ExecuteSQL(insertFolderStatement1) Then
                             If objDBCom.ExecuteSQL(insertFolderStatement2) Then
                                 Directory.CreateDirectory(folderName + txt_folder_name.Text.Trim)
-                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
+                                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                                 loadFolder()
                                 FillGrid()
-                                txt_folder_name.Text = String.Empty
+                                'txt_folder_name.Text = String.Empty
                             Else
                                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                             End If
@@ -321,27 +332,43 @@ Public Class UploadFiles
                             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
                         End If
                     End If
-
+                    Return True
                 Catch ex As Exception
                     'Console.WriteLine("The process failed: {0}.", ex.ToString())
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                    Return False
                 End Try
             End If
         End If
-    End Sub
+    End Function
 
-    Protected Sub btn_create_sub_folder_Click(sender As Object, e As EventArgs) Handles btn_create_sub_folder.Click
-        If ddl_select_folder.SelectedIndex <= 0 Then
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select folder');", True)
-        ElseIf txt_sub_folder_name.Text.Trim = "" Then
+    Function CreateSubFolder() As Boolean
+        'If ddl_select_folder.SelectedIndex <= 0 Then
+        '    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select folder');", True)
+        '    Return False
+        Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+        Dim takevalue As New DataTable
+        Dim takedataquery As String
+        If Not txt_folder_name.Text.Equals("") Then
+            takedataquery = "select FOLDER_NAME, FOLDER_SELF_ID from FILE_UPLOAD_FOLDER WHERE FOLDER_NAME = '" + txt_folder_name.Text + "'"
+        Else
+            takedataquery = "select FOLDER_NAME, FOLDER_SELF_ID from FILE_UPLOAD_FOLDER WHERE FOLDER_NAME = '" + ddl_select_folder.SelectedItem.Text + "'"
+        End If
+
+        objDBCom.ExecuteSQL(takevalue, takedataquery)
+
+
+        If txt_sub_folder_name.Text.Trim = "" Then
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder name cannot be empty');", True)
+            Return False
         ElseIf txt_sub_folder_name.Text.Trim <> "" Then
             If Not FolderNameIsOK(txt_sub_folder_name.Text.Trim) Then
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot contain special char');", True)
+                Return False
             Else
                 Try
                     ' Determine whether the directory exists.
-                    If Directory.Exists(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim) Then
+                    If Directory.Exists(folderName + takevalue.Rows(0)(0).ToString() + "\" + txt_sub_folder_name.Text.Trim) Then
                         'Console.WriteLine("That path exists already.")
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Sub folder already exists');", True)
                     Else
@@ -370,37 +397,103 @@ Public Class UploadFiles
 
                         conn.Close()
 
-                        Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
-                        Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + ddl_select_folder.SelectedValue + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
+
+                        Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + takevalue.Rows(0)(1).ToString() + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
                         objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
-                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME", ddl_select_folder.SelectedItem.Text)
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME", takevalue.Rows(0)(0).ToString())
 
-                        Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + ddl_select_folder.SelectedValue + ")"
+                        Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + takevalue.Rows(0)(1).ToString() + ")"
                         objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)
 
                         If objDBCom.ExecuteSQL(insertFolderStatement1) Then
                             If objDBCom.ExecuteSQL(insertFolderStatement2) Then
-                                Directory.CreateDirectory(folderName + ddl_select_folder.SelectedItem.Text + "\" + txt_sub_folder_name.Text.Trim)
+                                Directory.CreateDirectory(folderName + takevalue.Rows(0)(0).ToString() + "\" + txt_sub_folder_name.Text.Trim)
                                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                                 loadSubFolder()
                                 FillGrid()
-                                txt_sub_folder_name.Text = String.Empty
+                                'txt_sub_folder_name.Text = String.Empty
                             Else
                                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                                Return False
                             End If
                         Else
                             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                            Return False
                         End If
                     End If
-
+                    Return True
                 Catch ex As Exception
                     'Console.WriteLine("The process failed: {0}.", ex.ToString())
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error creating folder');", True)
+                    Return False
                 End Try
             End If
         End If
-    End Sub
+    End Function
+
+    Function UploadFiles(ByVal fileupload As FileUpload, ByVal versioning As String, ByVal count As Integer) As Boolean
+        Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+        Dim takevalue As New DataTable
+        Dim takedataquery As String
+        If Not txt_folder_name.Text.Equals("") Then
+            takedataquery = "select FOLDER_NAME, FOLDER_SELF_ID from FILE_UPLOAD_FOLDER WHERE FOLDER_NAME = '" + txt_folder_name.Text + "'"
+        Else
+            takedataquery = "select FOLDER_NAME, FOLDER_SELF_ID from FILE_UPLOAD_FOLDER WHERE FOLDER_NAME = '" + ddl_select_folder.SelectedItem.Text + "'"
+        End If
+        objDBCom.ExecuteSQL(takevalue, takedataquery)
+        objDBCom.Dispose()
+
+        Dim iUploadedCnt As Integer = 0
+        Dim iFailedCnt As Integer = 0
+        Dim hfc As HttpFileCollection = Request.Files
+
+        Try
+            Dim hpf As HttpPostedFile = hfc(count)
+            If hpf.ContentLength > 0 Then
+                Dim strFIleName As String = ""
+                strFIleName = hpf.FileName
+                Dim intFileSize As Int64
+                intFileSize = hpf.ContentLength
+                Dim strSubFolder As String = ""
+
+                If ddl_select_sub_folder.SelectedIndex > 0 Then
+                    strSubFolder = ddl_select_sub_folder.SelectedItem.Text + "\"
+                Else
+                    strSubFolder = txt_sub_folder_name.Text + "\"
+                End If
+
+                fileupload.PostedFile.SaveAs(folderName + takevalue.Rows(0)(0).ToString() + "\" + strSubFolder + strFIleName)
+
+                Dim conn As New SqlConnection
+                conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
+
+                conn.Open()
+
+                Dim insertCommand As New SqlCommand("INSERT INTO FILE_UPLOAD ([FOLDER_NAME], [FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FILE_PATH], [FILE_NAME], [FILE_SIZE], [FILE_VERSION], [UPLOAD_BY], [UPLOAD_DATE]) VALUES (@FOLDER_NAME, @FOLDER_PARENT_ID, @FOLDER_SELF_ID, @SUB_FOLDER_NAME, @FILE_PATH, @FILE_NAME, @FILE_SIZE, @FILE_VERSION, @UPLOAD_BY, GETDATE())", conn)
+
+                insertCommand.Parameters.AddWithValue("@FOLDER_NAME", takevalue.Rows(0)(0).ToString())
+                insertCommand.Parameters.AddWithValue("@FOLDER_PARENT_ID", takevalue.Rows(0)(1).ToString())
+                insertCommand.Parameters.AddWithValue("@FOLDER_SELF_ID", IIf(ddl_select_sub_folder.SelectedIndex > 0, ddl_select_sub_folder.SelectedValue, 0))
+                insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder.Replace("\", ""))
+                insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + takevalue.Rows(0)(0).ToString() + "\" + strSubFolder)
+                insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
+                insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
+                insertCommand.Parameters.AddWithValue("@FILE_VERSION", versioning.Trim)
+                insertCommand.Parameters.AddWithValue("@UPLOAD_BY", "")
+
+                insertCommand.ExecuteNonQuery()
+
+                conn.Close()
+            End If
+            FillGrid()
+            Return True
+        Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
+            Return False
+        End Try
+
+    End Function
 
     Protected Sub btn_search_Click(sender As Object, e As EventArgs) Handles btn_search.Click
         FillGrid()
@@ -416,4 +509,139 @@ Public Class UploadFiles
 
         Return True
     End Function
+
+    Protected Sub btnUpload2_Click(sender As Object, e As EventArgs) Handles btnUpload2.Click
+        If ddl_select_folder.SelectedIndex <= 0 Then
+            Exit Sub
+        ElseIf Not CreateSubFolder() Then
+            Exit Sub
+        End If
+
+        Try
+            If myFile.HasFile Then
+                If txt_version.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile, txt_version.Text, 0)
+                End If
+            End If
+
+            If myFile0.HasFile Then
+                If txt_version0.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile0, txt_version0.Text, 1)
+                End If
+            End If
+
+            If myFile1.HasFile Then
+                If txt_version1.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile1, txt_version1.Text, 2)
+                End If
+            End If
+
+            If myFile2.HasFile Then
+                If txt_version2.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile2, txt_version2.Text, 3)
+                End If
+            End If
+
+            If myFile3.HasFile Then
+                If txt_version3.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile3, txt_version3.Text, 4)
+                End If
+            End If
+
+            If myFile4.HasFile Then
+                If txt_version4.Text.Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                Else
+                    UploadFiles(myFile4, txt_version4.Text, 5)
+                End If
+            End If
+
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
+        Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
+        End Try
+
+        txt_folder_name.Text = ""
+        txt_sub_folder_name.Text = ""
+        ddl_select_folder.SelectedIndex = 0
+        ddl_select_sub_folder.SelectedIndex = 0
+
+    End Sub
+
+    Protected Sub btnUpload3_Click(sender As Object, e As EventArgs) Handles btnUpload3.Click
+        If ddl_select_folder.SelectedIndex <= 0 Or ddl_select_sub_folder.SelectedIndex <= 0 Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
+        Else
+            Try
+                If myFile.HasFile Then
+                    If txt_version.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile, txt_version.Text, 0)
+                    End If
+                Else
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
+                End If
+
+                If myFile0.HasFile Then
+                    If txt_version0.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile0, txt_version0.Text, 1)
+                    End If
+                End If
+
+                If myFile1.HasFile Then
+                    If txt_version1.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile1, txt_version1.Text, 2)
+                    End If
+                End If
+
+                If myFile2.HasFile Then
+                    If txt_version2.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile2, txt_version2.Text, 3)
+                    End If
+                End If
+
+                If myFile3.HasFile Then
+                    If txt_version3.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile3, txt_version3.Text, 4)
+                    End If
+                End If
+
+                If myFile4.HasFile Then
+                    If txt_version4.Text.Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                    Else
+                        UploadFiles(myFile4, txt_version4.Text, 5)
+                    End If
+                End If
+
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
+            Catch ex As Exception
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
+            End Try
+
+            txt_folder_name.Text = ""
+            txt_sub_folder_name.Text = ""
+            ddl_select_folder.SelectedIndex = 0
+            ddl_select_sub_folder.SelectedIndex = 0
+        End If
+    End Sub
 End Class

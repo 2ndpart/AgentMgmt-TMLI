@@ -6,10 +6,26 @@
         {
             width: 100%;
         }
-
         .RowFormDetail 
         {
             display: none;
+        }
+        .auto-style1 {
+            height: 20px;
+        }
+        .auto-style5 {
+            height: 20px;
+            width: 490px;
+        }
+        .auto-style8 {
+            width: 490px;
+        }
+        .auto-style9 {
+            height: 30px;
+        }
+        .auto-style10 {
+            width: 490px;
+            height: 30px;
         }
     </style>
 
@@ -26,6 +42,43 @@
             
             $(stringRowGroupJQueryClass).css("display", "none");
             $(stringRowSelectedJQueryClass).css("display", "table-row");
+        }
+
+        function togglefileupload()
+        {
+
+            $('.fileupload').css("display", "table-row");
+        }
+
+        function toggleCreateSubFolder()
+        {
+            $('.RowCreateSubFolder').css("display", "table-row");
+        }
+
+        function toggleFreshStart()
+        {
+            $('.FreshStart').css("display", "table-row");
+        }
+
+        function toggleSemiFreshStart()
+        {
+            $('.SemiFreshStart').css("display", "table-row");
+        }
+
+        function toggleReStart()
+        {
+            $('.ReStart').css("display", "table-row");
+        }
+
+        function toggleSelectFolder()
+        {
+            $('.RowFormSelectFolder').css("display", "table-row");
+        }
+
+        function togglesecondbutton() {
+
+            $('.secondbutton').css("display", "table-row");
+            $('.folderrow').css("display", "table-row");
         }
 
         function showWait()
@@ -120,136 +173,192 @@
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
-            <asp:PostBackTrigger ControlID="btnUpload" /> 
+            <asp:PostBackTrigger ControlID="btnUpload" />
+            <asp:PostBackTrigger ControlID="btnUpload2" /> 
+            <asp:PostBackTrigger ControlID="btnUpload3" /> 
         </Triggers>
         <ContentTemplate>
             <h2>                
                 E - Library</h2>
             <table class="nav-justified">
                 <tr>
-                    <td width="240">Select Folder</td>
-                    <td>
-                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px">                                                 
-                        </asp:DropDownList>
+                    <td width="240">Search</td>
+                    <td class="auto-style8">
+                        <asp:TextBox ID="txt_search" runat="server" class="form-control" Width="320" style="float:left;"></asp:TextBox>
+                        <asp:Button ID="btn_search" runat="server" Text="Search" class="btn btn-info" Height="30px" />
                     </td>
                 </tr>
                 <tr>                    
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
                  <tr>                    
                     <td>                        
-                        <input type="button" id="btnAddFolder" value="Add Folder" onclick="toggleFormDetail('RowFormFolder', 'RowFormDetail')"/>
-                     </td>
-                     <td>                         
-                         <input type="button" id="btnAddFile" value="Add File"  onclick="toggleFormDetail('RowFormFile', 'RowFormDetail')"/>
+                        &nbsp;</td>
+                     <td class="auto-style8">                         
+                         <input type="button" id="btnAddFolder" value="Create New" onclick="toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart()"/>
+                         <input type="button" id="btnAddFile" value="Existing"  onclick="toggleFormDetail('RowFormFile', 'RowFormDetail'); togglesecondbutton()"/>
+                         <asp:Button ID="btnDelete" runat="server" Text="Delete" />
                      </td>
                 </tr>
                 <tr>                    
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style1"></td>
+                    <td class="auto-style5"></td>
                 </tr>
-                <tr class="RowFormFile RowFormDetail">
-                    <td>Select Sub Folder</td>
-                    <td>
-                        <asp:DropDownList ID="ddl_select_sub_folder" runat="server" class="form-control" Width="300px">
-                            
+                <tr class="folderrow RowFormDetail">
+                    <td class="auto-style9">Select Folder</td>
+                    <td class="auto-style10">
+                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px">
                         </asp:DropDownList>
                     </td>
                 </tr>
-                 <tr class="RowFormFile RowFormDetail">                    
+                 <tr class="folderrow RowFormDetail">                    
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
-                <tr class="RowFormFile RowFormDetail">                    
-                    <td>Select File</td>
-                    <td>
-                        <asp:FileUpload ID="myFile" runat="server" multiple="true"/>
+                <tr class="secondbutton RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">
+                        <input type="button" id="btnCreateSub" value="Create New Subfolder" onclick="toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleCreateSubFolder(); toggleSemiFreshStart()"/>
+                        <input type="button" id="btnExisting" value="Existing" onclick="toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart()"/>
                         <%--<ajaxToolkit:AjaxFileUpload ID="myFile" runat="server" MaximumNumberOfFiles="10" />--%>
                     </td>
                 </tr>                            
-                <tr class="RowFormFile RowFormDetail">                    
+                <tr class="RowFormSubFile RowFormDetail">                    
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
-                <tr class="RowFormFile RowFormDetail">                    
-                    <td>File Version</td>
-                    <td>
-                        <asp:TextBox ID="txt_version" runat="server" class="form-control"></asp:TextBox>
+                <tr class="RowFormSelectFolder RowFormDetail">                    
+                    <td>Select Sub Folder</td>
+                    <td class="auto-style8">
+                        <asp:DropDownList ID="ddl_select_sub_folder" runat="server" class="form-control" Width="300px">
+                        </asp:DropDownList>
                     </td>
                 </tr>  
-                <tr class="RowFormFile RowFormDetail">                    
+                <tr class="RowFormSelectFolder RowFormDetail">                    
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>              
-                <tr class="RowFormFolder RowFormDetail">                    
-                    <td>Create Folder Name</td>
-                    <td><asp:TextBox ID="txt_folder_name" runat="server" class="form-control" Width="300px"></asp:TextBox></td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
                 <tr class="RowFormFolder RowFormDetail">                    
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="RowFormFolder RowFormDetail">                    
-                    <td>
-                        <asp:Button ID="btn_create_folder" runat="server" Text="Create Folder" />
+                    <td class="auto-style9">Create Folder Name</td>
+                    <td class="auto-style10"><asp:TextBox ID="txt_folder_name" runat="server" class="form-control" Width="300px" style="float:left;" ></asp:TextBox>
                     </td>
-                    <td></td>
                 </tr>
                 <tr class="RowFormFolder RowFormDetail">                    
-                    <td></td>
-                    <td></td>
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
-                <tr class="RowFormFolder RowFormDetail">
+                <tr class="RowCreateSubFolder RowFormDetail">                    
                     <td>Create Sub Folder Name</td>
+                    <td class="auto-style8">
+                        <asp:TextBox ID="txt_sub_folder_name" runat="server" class="form-control" Width="300px" style="float:left;" ></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="RowCreateSubFolder RowFormDetail">                    
+                    <td class="auto-style1"></td>
+                    <td class="auto-style5"></td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>Select File</td>
+                    <td class="auto-style8">
+                        <asp:FileUpload ID="myFile" runat="server" multiple="true" Width="300px" style="float:left;" class="form-control"/>
+                        <asp:TextBox ID="txt_version" runat="server" class="form-control" Width="160px" style="float:left;" placeholder="File Version"></asp:TextBox>
+                        </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
+                </tr>
+                <tr class="fileupload RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:FileUpload ID="myFile0" runat="server" class="form-control" multiple="true" style="float:left;" Width="300px" />
+                        <asp:TextBox ID="txt_version0" runat="server" class="form-control" placeholder="File Version" style="float:left;" Width="160px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">
+                        &nbsp;</td>
+                </tr>
+                <tr class="fileupload RowFormDetail">                    
+                    <td class="auto-style1"></td>
+                    <td class="auto-style5">
+                        <asp:FileUpload ID="myFile1" runat="server" class="form-control" multiple="true" style="float:left;" Width="300px" />
+                        <asp:TextBox ID="txt_version1" runat="server" class="form-control" placeholder="File Version" style="float:left;" Width="160px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">                        
+                        &nbsp;</td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>                    
+                    <td class="auto-style8">
+                        <asp:FileUpload ID="myFile2" runat="server" class="form-control" multiple="true" style="float:left;" Width="300px" />
+                        <asp:TextBox ID="txt_version2" runat="server" class="form-control" placeholder="File Version" style="float:left;" Width="160px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">                    
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:FileUpload ID="myFile3" runat="server" class="form-control" multiple="true" style="float:left;" Width="300px" />
+                        <asp:TextBox ID="txt_version3" runat="server" class="form-control" placeholder="File Version" style="float:left;" Width="160px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td>&nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:FileUpload ID="myFile4" runat="server" class="form-control" multiple="true" style="float:left;" Width="300px" />
+                        <asp:TextBox ID="txt_version4" runat="server" class="form-control" placeholder="File Version" style="float:left;" Width="160px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="fileupload RowFormDetail">
+                    <td class="auto-style1"></td>
+                    <td class="auto-style5"></td>
+                </tr>
+                <tr class="FreshStart RowFormDetail">
                     <td>
-                        <asp:TextBox ID="txt_sub_folder_name" runat="server" class="form-control" Width="300px"></asp:TextBox>
-                    </td>
+                        &nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:Button ID="btnUpload" runat="server" OnClientClick="showWait();" Text="Upload" Width="61px" />
+                        &nbsp;&nbsp;&nbsp;
+                        </td>
                 </tr>
-                <tr class="RowFormFolder RowFormDetail">                    
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="RowFormFolder RowFormDetail">                    
+                <tr class="SemiFreshStart RowFormDetail">
                     <td>
-                        <asp:Button ID="btn_create_sub_folder" runat="server" Text="Create Sub Folder" />
-                    </td>
-                    <td></td>
+                        &nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:Button ID="btnUpload2" runat="server" OnClientClick="showWait();" Text="Upload" Width="61px" />
+                        &nbsp;&nbsp;&nbsp;
+                        </td>
                 </tr>
-                <tr class="RowFormFolder RowFormDetail">                    
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>Search</td>
-                    <td>                        
-                        <asp:TextBox ID="txt_search" runat="server" Width="320" class="form-control"></asp:TextBox>                        
-                    </td>
-                </tr>
-                <tr>
-                    <td><asp:Button ID="btn_search" runat="server" Text="Search" /></td>                    
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>                    
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
+                <tr class="ReStart RowFormDetail">
                     <td>
-                        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClientClick="showWait();"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="btnDelete" runat="server" Text="Delete" />
-                    </td>
-                    <td>&nbsp;</td>
+                        &nbsp;</td>
+                    <td class="auto-style8">
+                        <asp:Button ID="btnUpload3" runat="server" OnClientClick="showWait();" Text="Upload" Width="61px" />
+                        &nbsp;&nbsp;&nbsp;
+                        </td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
                 <tr>
                     <td>
                         <asp:Label ID="lblMsg" runat="server"></asp:Label>
                     </td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style8">&nbsp;</td>
                 </tr>
                 <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
                     AssociatedUpdatePanelID="UpdatePanel1">

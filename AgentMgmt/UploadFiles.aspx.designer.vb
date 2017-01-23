@@ -32,6 +32,33 @@ Partial Public Class UploadFiles
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''txt_search control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_search As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btn_search control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_search As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''ddl_select_folder control.
     '''</summary>
     '''<remarks>
@@ -48,6 +75,24 @@ Partial Public Class UploadFiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddl_select_sub_folder As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''txt_folder_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_folder_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txt_sub_folder_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_sub_folder_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''myFile control.
@@ -68,58 +113,94 @@ Partial Public Class UploadFiles
     Protected WithEvents txt_version As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txt_folder_name control.
+    '''myFile0 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_folder_name As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents myFile0 As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btn_create_folder control.
+    '''txt_version0 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_create_folder As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txt_version0 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txt_sub_folder_name control.
+    '''myFile1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_sub_folder_name As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents myFile1 As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btn_create_sub_folder control.
+    '''txt_version1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_create_sub_folder As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txt_version1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txt_search control.
+    '''myFile2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_search As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents myFile2 As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btn_search control.
+    '''txt_version2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_search As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txt_version2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''myFile3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents myFile3 As Global.System.Web.UI.WebControls.FileUpload
+    
+    '''<summary>
+    '''txt_version3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_version3 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''myFile4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents myFile4 As Global.System.Web.UI.WebControls.FileUpload
+    
+    '''<summary>
+    '''txt_version4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_version4 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btnUpload control.
@@ -131,13 +212,22 @@ Partial Public Class UploadFiles
     Protected WithEvents btnUpload As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnDelete control.
+    '''btnUpload2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnUpload2 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnUpload3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpload3 As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''lblMsg control.
