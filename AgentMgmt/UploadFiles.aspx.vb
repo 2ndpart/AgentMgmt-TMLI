@@ -28,10 +28,7 @@ Public Class UploadFiles
             Exit Sub
         End If
 
-        If Not CreateSubFolder() Then
-            Exit Sub
-        End If
-
+        CreateSubFolder()
         Try
             If myFile.HasFile Then
                 If txt_version.Text.Equals("") Then
@@ -41,7 +38,7 @@ Public Class UploadFiles
                     UploadFiles(myFile, txt_version.Text, 0)
                 End If
             Else
-                counter.Add("Please select a file to upload")
+                counter.Add("Create folder successful")
                 'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
             End If
 
