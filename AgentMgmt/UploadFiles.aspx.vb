@@ -298,7 +298,7 @@ Public Class UploadFiles
                     ' Determine whether the directory exists.
                     If Directory.Exists(folderName + txt_folder_name.Text.Trim) Then
                         'Console.WriteLine("That path exists already.")
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder already exists');", True)
+                        'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder already exists');", True)
                     Else
                         Dim conn As New SqlConnection
                         conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
@@ -422,7 +422,7 @@ Public Class UploadFiles
                         If objDBCom.ExecuteSQL(insertFolderStatement1) Then
                             If objDBCom.ExecuteSQL(insertFolderStatement2) Then
                                 Directory.CreateDirectory(folderName + takevalue.Rows(0)(0).ToString() + "\" + txt_sub_folder_name.Text.Trim)
-                                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
+                                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                                 loadSubFolder()
                                 FillGrid()
                                 'txt_sub_folder_name.Text = String.Empty
