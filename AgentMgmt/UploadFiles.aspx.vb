@@ -37,8 +37,8 @@ Public Class UploadFiles
                 Else
                     UploadFiles(myFile, txt_version.Text, 0)
                 End If
-            Else
-                counter.Add("Create folder successful")
+                'Else
+                '    counter.Add("Create folder successful")
                 'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
             End If
 
@@ -89,10 +89,10 @@ Public Class UploadFiles
 
             Dim result As String = String.Join(", ", counter)
             If Not result.ToString().Equals("") Then
-                If myFile.HasFile Then
+                If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
                 Else
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('" + result.ToString() + "');", True)
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                 End If
             Else
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
@@ -601,12 +601,18 @@ Public Class UploadFiles
         txt_sub_folder_name.Text = ""
         ddl_select_folder.SelectedIndex = 0
         ddl_select_sub_folder.SelectedIndex = 0
+        txt_version.Text = ""
+        txt_version0.Text = ""
+        txt_version1.Text = ""
+        txt_version2.Text = ""
+        txt_version3.Text = ""
+        txt_version4.Text = ""
 
     End Sub
 
     Protected Sub btnUpload3_Click(sender As Object, e As EventArgs) Handles btnUpload3.Click
         Dim counter As List(Of String) = New List(Of String)
-        If ddl_select_folder.SelectedIndex <= 0 Or ddl_select_sub_folder.SelectedIndex <= 0 Then
+        If ddl_select_folder.SelectedIndex <= 0 Then
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
         Else
             Try
@@ -617,8 +623,8 @@ Public Class UploadFiles
                     Else
                         UploadFiles(myFile, txt_version.Text, 0)
                     End If
-                Else
-                    counter.Add("Please select a file to upload")
+                    'Else
+                    '    counter.Add("Please select a file to upload")
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
                 End If
 
@@ -669,10 +675,10 @@ Public Class UploadFiles
 
                 Dim result As String = String.Join(", ", counter)
                 If Not result.ToString().Equals("") Then
-                    If myFile.HasFile Then
+                    If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
                     Else
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('" + result.ToString() + "');", True)
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
                     End If
                 Else
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
@@ -687,6 +693,12 @@ Public Class UploadFiles
             txt_sub_folder_name.Text = ""
             ddl_select_folder.SelectedIndex = 0
             ddl_select_sub_folder.SelectedIndex = 0
+            txt_version.Text = ""
+            txt_version0.Text = ""
+            txt_version1.Text = ""
+            txt_version2.Text = ""
+            txt_version3.Text = ""
+            txt_version4.Text = ""
         End If
     End Sub
 End Class
