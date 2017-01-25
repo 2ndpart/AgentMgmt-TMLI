@@ -25,6 +25,16 @@ Public Class UploadFiles
     Protected Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         Dim counter As List(Of String) = New List(Of String)
         If Not CreateFolder() Then
+            txt_folder_name.Text = ""
+            txt_sub_folder_name.Text = ""
+            ddl_select_folder.SelectedIndex = 0
+            ddl_select_sub_folder.SelectedIndex = 0
+            txt_version.Text = ""
+            txt_version0.Text = ""
+            txt_version1.Text = ""
+            txt_version2.Text = ""
+            txt_version3.Text = ""
+            txt_version4.Text = ""
             Exit Sub
         End If
 
@@ -526,9 +536,20 @@ Public Class UploadFiles
     Protected Sub btnUpload2_Click(sender As Object, e As EventArgs) Handles btnUpload2.Click
         Dim counter As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
+            txt_folder_name.Text = ""
+            txt_sub_folder_name.Text = ""
+            ddl_select_folder.SelectedIndex = 0
+            ddl_select_sub_folder.SelectedIndex = 0
+            txt_version.Text = ""
+            txt_version0.Text = ""
+            txt_version1.Text = ""
+            txt_version2.Text = ""
+            txt_version3.Text = ""
+            txt_version4.Text = ""
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
             Exit Sub
         ElseIf Not CreateSubFolder() Then
-            Exit Sub
+
         End If
 
         Try
@@ -613,6 +634,16 @@ Public Class UploadFiles
     Protected Sub btnUpload3_Click(sender As Object, e As EventArgs) Handles btnUpload3.Click
         Dim counter As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
+            txt_folder_name.Text = ""
+            txt_sub_folder_name.Text = ""
+            ddl_select_folder.SelectedIndex = 0
+            ddl_select_sub_folder.SelectedIndex = 0
+            txt_version.Text = ""
+            txt_version0.Text = ""
+            txt_version1.Text = ""
+            txt_version2.Text = ""
+            txt_version3.Text = ""
+            txt_version4.Text = ""
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
         Else
             Try
