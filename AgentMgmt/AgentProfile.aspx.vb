@@ -377,6 +377,12 @@ Public Class AgentProfile
                     myProcess.WaitForExit()
                     myProcess.Close()
 
+                    'update the records for invitation send date
+
+                    'Dim command As New SqlCommand("UPDATE TMLI_Agent_Profile SET InvitationDate = @invitation WHERE AgentCode =@agentCode")
+                    'command.Parameters.AddWithValue("@invitation", Now)
+                    'command.Parameters.AddWithValue("@agentCode", txt_Code.Text)
+                    'objDBCom.ExecuteSqlCommand(command)
 
                     ScriptManager.RegisterStartupScript(Me, Me.[GetType](), "alert", "alert('Success!');", True)
                 Else

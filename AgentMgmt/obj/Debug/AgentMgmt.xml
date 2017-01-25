@@ -1629,27 +1629,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.Site._SPAJ_Submission_List">
-<summary>
-SPAJ_Submission_List control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:AgentMgmt.Site._STP_Rules_Table">
 <summary>
 STP_Rules_Table control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.Site._Product_Configurator">
-<summary>
-Product_Configurator control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1668,6 +1650,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.Site._Payment_Lsting">
 <summary>
 Payment_Lsting control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.Site._fooItem">
+<summary>
+fooItem control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1926,9 +1917,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.UploadFiles._ToolkitScriptManager1">
+<member name="F:AgentMgmt.UploadFiles._ScriptManager1">
 <summary>
-ToolkitScriptManager1 control.
+ScriptManager1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1938,51 +1929,6 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.UploadFiles._UpdatePanel1">
 <summary>
 UpdatePanel1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.UploadFiles._ddl_select_folder">
-<summary>
-ddl_select_folder control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.UploadFiles._ddl_select_sub_folder">
-<summary>
-ddl_select_sub_folder control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.UploadFiles._myFile">
-<summary>
-myFile control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.UploadFiles._txt_sub_folder_name">
-<summary>
-txt_sub_folder_name control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:AgentMgmt.UploadFiles._btn_create_sub_folder">
-<summary>
-btn_create_sub_folder control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2007,6 +1953,159 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:AgentMgmt.UploadFiles._btnDelete">
+<summary>
+btnDelete control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._ddl_select_folder">
+<summary>
+ddl_select_folder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._ddl_select_sub_folder">
+<summary>
+ddl_select_sub_folder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_folder_name">
+<summary>
+txt_folder_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_sub_folder_name">
+<summary>
+txt_sub_folder_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile">
+<summary>
+myFile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version">
+<summary>
+txt_version control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile0">
+<summary>
+myFile0 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version0">
+<summary>
+txt_version0 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile1">
+<summary>
+myFile1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version1">
+<summary>
+txt_version1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile2">
+<summary>
+myFile2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version2">
+<summary>
+txt_version2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile3">
+<summary>
+myFile3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version3">
+<summary>
+txt_version3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._myFile4">
+<summary>
+myFile4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._txt_version4">
+<summary>
+txt_version4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:AgentMgmt.UploadFiles._btnUpload">
 <summary>
 btnUpload control.
@@ -2016,9 +2115,18 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.UploadFiles._btnDelete">
+<member name="F:AgentMgmt.UploadFiles._btnUpload2">
 <summary>
-btnDelete control.
+btnUpload2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.UploadFiles._btnUpload3">
+<summary>
+btnUpload3 control.
 </summary>
 <remarks>
 Auto-generated field.
