@@ -130,7 +130,7 @@ Public Class UploadFiles
             Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
             Using cmd As New SqlCommand
-                Dim cmdText As String = "SELECT [ID], [FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_NAME], [FILE_VERSION], [FILE_SIZE], [UPLOAD_BY], [UPLOAD_DATE] FROM [FILE_UPLOAD] WHERE [FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [SUB_FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [FILE_NAME] LIKE '%" + txt_search.Text + "%'"
+                Dim cmdText As String = "SELECT [ID], [FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_NAME], [FILE_VERSION], [FILE_SIZE], [UPLOAD_BY], [UPLOAD_DATE] FROM [FILE_UPLOAD] WHERE [FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [SUB_FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [FILE_NAME] LIKE '%" + txt_search.Text + "%' ORDER BY FOLDER_NAME ASC, SUB_FOLDER_NAME ASC, FILE_NAME ASC"
 
                 cmd.CommandText = cmdText
 
