@@ -2205,6 +2205,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:AgentMgmt.UploadFilesEdit._btnURL">
+<summary>
+btnURL control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:AgentMgmt.UploadPhoto._imgPreview1">
 <summary>
 imgPreview1 control.

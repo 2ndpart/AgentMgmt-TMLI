@@ -57,4 +57,13 @@ Partial Public Class UploadFilesEdit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnURL As Global.System.Web.UI.WebControls.Button
 End Class

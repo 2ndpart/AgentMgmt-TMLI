@@ -1,0 +1,6 @@
+04:21:09PM -- ExecuteSQL(DataRetriever, SELECT COUNT FROM TMLI_SendEmail WHERE id=80008007) : Invalid column name 'id'.
+Invalid column name 'COUNT'.
+04:22:23PM -- ExecuteSQL(DataRetriever, SELECT COUNT FROM TMLI_SendEmail WHERE id=80008007) : Invalid column name 'id'.
+Invalid column name 'COUNT'.
+04:27:09PM -- ExecuteSQL(DataRetriever, SELECT COUNT(ID) FROM TMLI_SendEmail WHERE id=80008007) : Invalid column name 'id'.
+Invalid column name 'ID'.

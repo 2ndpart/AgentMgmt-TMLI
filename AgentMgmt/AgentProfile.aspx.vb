@@ -345,15 +345,31 @@ Public Class AgentProfile
                 Dim messageBody As String = String.Format(body, "https://tmconnect.tokiomarine-life.co.id/anvoaiwenvwae0v-wevjhweivnawuen12j3n12m%20asjkdfna%20sdjf%20123.html", ipadimage, "http://www.google.com",
                                                       desktopimage, "<STRONG>Kode Agen Anda</STRONG>", encrypt.DecryptString(txt_pass.Text, "1234567891123456"))
 
-                Dim messageId = txt_Code.Text
                 Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(CStr(POSWeb.POSWeb_SQLConn))
-                Dim sqlInsert As String = "INSERT INTO TMLI_SendEmail VALUES (@id,@emailTo,@content,@status)"
-                Dim comm As New SqlCommand(sqlInsert)
-                comm.Parameters.AddWithValue("@id", txt_Code.Text)
-                comm.Parameters.AddWithValue("@emailTo", txt_email.Text)
-                comm.Parameters.AddWithValue("@content", messageBody)
-                comm.Parameters.AddWithValue("@status", "Sending")
-                Dim result As Boolean = objDBCom.ExecuteSqlCommand(comm)
+                Dim selectCount As String = "SELECT COUNT(EmailID) FROM TMLI_SendEmail WHERE EmailID=" & txt_Code.Text
+                Dim tempDt As New DataTable
+                Dim result As Boolean
+                objDBCom.ExecuteSQL(tempDt, selectCount)
+                Dim messageId = txt_Code.Text
+
+                If tempDt.Rows.Count > 0 Then
+                    Dim sqlInsert As String = "UPDATE TMLI_SendEmail SET EmailTo=@emailTo, EmailContent=@content, EmailStatus=@status WHERE EmailID=@id"
+                    Dim comm As New SqlCommand(sqlInsert)
+                    comm.Parameters.AddWithValue("@id", txt_Code.Text)
+                    comm.Parameters.AddWithValue("@emailTo", txt_email.Text)
+                    comm.Parameters.AddWithValue("@content", messageBody)
+                    comm.Parameters.AddWithValue("@status", "Sending")
+                    result = objDBCom.ExecuteSqlCommand(comm)
+                Else
+                    Dim sqlInsert As String = "INSERT INTO TMLI_SendEmail VALUES (@id,@emailTo,@content,@status)"
+                    Dim comm As New SqlCommand(sqlInsert)
+                    comm.Parameters.AddWithValue("@id", txt_Code.Text)
+                    comm.Parameters.AddWithValue("@emailTo", txt_email.Text)
+                    comm.Parameters.AddWithValue("@content", messageBody)
+                    comm.Parameters.AddWithValue("@status", "Sending")
+                    result = objDBCom.ExecuteSqlCommand(comm)
+                End If
+
 
                 If result Then
                     Dim processinfo As New ProcessStartInfo()

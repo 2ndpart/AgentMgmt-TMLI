@@ -100,28 +100,39 @@ Public Class UploadFiles
             Dim result As String = String.Join(", ", counter)
             If Not result.ToString().Equals("") Then
                 If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart();", True)
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
                 Else
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
+                    txt_folder_name.Text = ""
+                    txt_sub_folder_name.Text = ""
+                    ddl_select_folder.SelectedIndex = 0
+                    ddl_select_sub_folder.SelectedIndex = 0
+                    txt_version.Text = ""
+                    txt_version0.Text = ""
+                    txt_version1.Text = ""
+                    txt_version2.Text = ""
+                    txt_version3.Text = ""
+                    txt_version4.Text = ""
                 End If
             Else
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
+                txt_folder_name.Text = ""
+                txt_sub_folder_name.Text = ""
+                ddl_select_folder.SelectedIndex = 0
+                ddl_select_sub_folder.SelectedIndex = 0
+                txt_version.Text = ""
+                txt_version0.Text = ""
+                txt_version1.Text = ""
+                txt_version2.Text = ""
+                txt_version3.Text = ""
+                txt_version4.Text = ""
             End If
 
         Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart();", True)
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
         End Try
-
-        txt_folder_name.Text = ""
-        txt_sub_folder_name.Text = ""
-        ddl_select_folder.SelectedIndex = 0
-        ddl_select_sub_folder.SelectedIndex = 0
-        txt_version.Text = ""
-        txt_version0.Text = ""
-        txt_version1.Text = ""
-        txt_version2.Text = ""
-        txt_version3.Text = ""
-        txt_version4.Text = ""
 
     End Sub
 
@@ -130,7 +141,7 @@ Public Class UploadFiles
             Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
             Using cmd As New SqlCommand
-                Dim cmdText As String = "SELECT [ID], [FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_NAME], [FILE_VERSION], [FILE_SIZE], [UPLOAD_BY], [UPLOAD_DATE] FROM [FILE_UPLOAD] WHERE [FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [SUB_FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [FILE_NAME] LIKE '%" + txt_search.Text + "%'"
+                Dim cmdText As String = "SELECT [ID], [FOLDER_NAME], [SUB_FOLDER_NAME], [FILE_NAME], [FILE_VERSION], [FILE_SIZE], [UPLOAD_BY], [UPLOAD_DATE] FROM [FILE_UPLOAD] WHERE [FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [SUB_FOLDER_NAME] LIKE '%" + txt_search.Text + "%' OR [FILE_NAME] LIKE '%" + txt_search.Text + "%' ORDER BY FOLDER_NAME ASC, SUB_FOLDER_NAME ASC, FILE_NAME ASC"
 
                 cmd.CommandText = cmdText
 
@@ -280,10 +291,17 @@ Public Class UploadFiles
         Try
             Dim conn As New SqlConnection
             conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
-            Dim adapter As New SqlDataAdapter("SELECT [FOLDER_SELF_ID], [FOLDER_NAME] FROM [FILE_UPLOAD_FOLDER] WHERE [FOLDER_LEVEL] = 2", conn)
-            'WHERE [FOLDER_NAME]='" & ddl_select_folder.SelectedValue & "' ORDER BY SUB_FOLDER_NAME", conn)
+            Dim adapter As New SqlDataAdapter("SELECT [FOLDER_SELF_ID], [FOLDER_NAME] FROM [FILE_UPLOAD_FOLDER] WHERE [FOLDER_LEVEL] = 2 AND FOLDER_PARENT_ID = (SELECT FOLDER_SELF_ID FROM FILE_UPLOAD_FOLDER WHERE FOLDER_NAME = '" + ddl_select_folder.SelectedItem.Text + "' AND FOLDER_LEVEL = 1)", conn)
+            Dim adapter2 As New SqlDataAdapter("SELECT [FOLDER_SELF_ID], [FOLDER_NAME] FROM [FILE_UPLOAD_FOLDER] WHERE [FOLDER_LEVEL] = 2", conn)
             Dim dSource As New DataTable()
-            adapter.Fill(dSource)
+            If ddl_select_folder.SelectedIndex <= 0 Then
+                adapter2.Fill(dSource)
+            Else
+                adapter.Fill(dSource)
+            End If
+
+            'WHERE [FOLDER_NAME]='" & ddl_select_folder.SelectedValue & "' ORDER BY SUB_FOLDER_NAME", conn)
+
             ddl_select_sub_folder.ClearSelection()
             ddl_select_sub_folder.DataSource = dSource
             ddl_select_sub_folder.DataTextField = "FOLDER_NAME"
@@ -297,10 +315,12 @@ Public Class UploadFiles
 
     Function CreateFolder() As Boolean
         If txt_folder_name.Text.Trim = "" Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart();", True)
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot be empty');", True)
             Return False
         ElseIf txt_folder_name.Text.Trim <> "" Then
             If Not FolderNameIsOK(txt_folder_name.Text.Trim) Then
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart();", True)
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder name cannot contain special char');", True)
                 Return False
             Else
@@ -474,8 +494,8 @@ Public Class UploadFiles
         Try
             Dim hpf As HttpPostedFile = hfc(count)
             If hpf.ContentLength > 0 Then
-                Dim strFIleName As String = ""
-                strFIleName = hpf.FileName
+                Dim strFileName As String = ""
+                strFileName = hpf.FileName
                 Dim intFileSize As Int64
                 intFileSize = hpf.ContentLength
                 Dim strSubFolder As String = ""
@@ -486,7 +506,7 @@ Public Class UploadFiles
                     strSubFolder = txt_sub_folder_name.Text + "\"
                 End If
 
-                fileupload.PostedFile.SaveAs(folderName + takevalue.Rows(0)(0).ToString() + "\" + strSubFolder + strFIleName)
+                fileupload.PostedFile.SaveAs(folderName + takevalue.Rows(0)(0).ToString() + "\" + strSubFolder + strFileName)
 
                 Dim conn As New SqlConnection
                 conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
@@ -500,7 +520,7 @@ Public Class UploadFiles
                 insertCommand.Parameters.AddWithValue("@FOLDER_SELF_ID", IIf(ddl_select_sub_folder.SelectedIndex > 0, ddl_select_sub_folder.SelectedValue, 0))
                 insertCommand.Parameters.AddWithValue("@SUB_FOLDER_NAME", strSubFolder.Replace("\", ""))
                 insertCommand.Parameters.AddWithValue("@FILE_PATH", folderName + takevalue.Rows(0)(0).ToString() + "\" + strSubFolder)
-                insertCommand.Parameters.AddWithValue("@FILE_NAME", strFIleName)
+                insertCommand.Parameters.AddWithValue("@FILE_NAME", strFileName)
                 insertCommand.Parameters.AddWithValue("@FILE_SIZE", intFileSize)
                 insertCommand.Parameters.AddWithValue("@FILE_VERSION", versioning.Trim)
                 insertCommand.Parameters.AddWithValue("@UPLOAD_BY", "")
@@ -536,16 +556,17 @@ Public Class UploadFiles
     Protected Sub btnUpload2_Click(sender As Object, e As EventArgs) Handles btnUpload2.Click
         Dim counter As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
-            txt_folder_name.Text = ""
-            txt_sub_folder_name.Text = ""
-            ddl_select_folder.SelectedIndex = 0
-            ddl_select_sub_folder.SelectedIndex = 0
-            txt_version.Text = ""
-            txt_version0.Text = ""
-            txt_version1.Text = ""
-            txt_version2.Text = ""
-            txt_version3.Text = ""
-            txt_version4.Text = ""
+            'txt_folder_name.Text = ""
+            'txt_sub_folder_name.Text = ""
+            'ddl_select_folder.SelectedIndex = 0
+            'ddl_select_sub_folder.SelectedIndex = 0
+            'txt_version.Text = ""
+            'txt_version0.Text = ""
+            'txt_version1.Text = ""
+            'txt_version2.Text = ""
+            'txt_version3.Text = ""
+            'txt_version4.Text = ""
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleCreateSubFolder(); toggleSemiFreshStart();", True)
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
             Exit Sub
         ElseIf Not CreateSubFolder() Then
@@ -609,41 +630,45 @@ Public Class UploadFiles
 
             Dim result As String = String.Join(", ", counter)
             If Not result.ToString().Equals("") Then
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleCreateSubFolder(); toggleSemiFreshStart();", True)
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
             Else
+                txt_folder_name.Text = ""
+                txt_sub_folder_name.Text = ""
+                ddl_select_folder.SelectedIndex = 0
+                ddl_select_sub_folder.SelectedIndex = 0
+                txt_version.Text = ""
+                txt_version0.Text = ""
+                txt_version1.Text = ""
+                txt_version2.Text = ""
+                txt_version3.Text = ""
+                txt_version4.Text = ""
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
             End If
 
         Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleCreateSubFolder(); toggleSemiFreshStart();", True)
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
         End Try
 
-        txt_folder_name.Text = ""
-        txt_sub_folder_name.Text = ""
-        ddl_select_folder.SelectedIndex = 0
-        ddl_select_sub_folder.SelectedIndex = 0
-        txt_version.Text = ""
-        txt_version0.Text = ""
-        txt_version1.Text = ""
-        txt_version2.Text = ""
-        txt_version3.Text = ""
-        txt_version4.Text = ""
+
 
     End Sub
 
     Protected Sub btnUpload3_Click(sender As Object, e As EventArgs) Handles btnUpload3.Click
         Dim counter As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
-            txt_folder_name.Text = ""
-            txt_sub_folder_name.Text = ""
-            ddl_select_folder.SelectedIndex = 0
-            ddl_select_sub_folder.SelectedIndex = 0
-            txt_version.Text = ""
-            txt_version0.Text = ""
-            txt_version1.Text = ""
-            txt_version2.Text = ""
-            txt_version3.Text = ""
-            txt_version4.Text = ""
+            'txt_folder_name.Text = ""
+            'txt_sub_folder_name.Text = ""
+            'ddl_select_folder.SelectedIndex = 0
+            'ddl_select_sub_folder.SelectedIndex = 0
+            'txt_version.Text = ""
+            'txt_version0.Text = ""
+            'txt_version1.Text = ""
+            'txt_version2.Text = ""
+            'txt_version3.Text = ""
+            'txt_version4.Text = ""
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a folder');", True)
         Else
             Try
@@ -707,29 +732,38 @@ Public Class UploadFiles
                 Dim result As String = String.Join(", ", counter)
                 If Not result.ToString().Equals("") Then
                     If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
                     Else
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)
                     End If
                 Else
+                    txt_folder_name.Text = ""
+                    txt_sub_folder_name.Text = ""
+                    ddl_select_folder.SelectedIndex = 0
+                    ddl_select_sub_folder.SelectedIndex = 0
+                    txt_version.Text = ""
+                    txt_version0.Text = ""
+                    txt_version1.Text = ""
+                    txt_version2.Text = ""
+                    txt_version3.Text = ""
+                    txt_version4.Text = ""
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('File upload success');", True)
                 End If
 
 
             Catch ex As Exception
+                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error upload file');", True)
             End Try
 
-            txt_folder_name.Text = ""
-            txt_sub_folder_name.Text = ""
-            ddl_select_folder.SelectedIndex = 0
-            ddl_select_sub_folder.SelectedIndex = 0
-            txt_version.Text = ""
-            txt_version0.Text = ""
-            txt_version1.Text = ""
-            txt_version2.Text = ""
-            txt_version3.Text = ""
-            txt_version4.Text = ""
+
         End If
+    End Sub
+
+    Protected Sub ddl_select_folder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddl_select_folder.SelectedIndexChanged
+        loadSubFolder()
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "toggleFormDetail('RowFormFile', 'RowFormDetail'); togglesecondbutton();", True)
     End Sub
 End Class

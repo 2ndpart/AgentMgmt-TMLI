@@ -174,12 +174,11 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
             <asp:PostBackTrigger ControlID="btnUpload" />
-            <asp:PostBackTrigger ControlID="btnUpload2" /> 
-            <asp:PostBackTrigger ControlID="btnUpload3" /> 
+            <asp:PostBackTrigger ControlID="btnUpload2" />
+            <asp:PostBackTrigger ControlID="btnUpload3" />
         </Triggers>
         <ContentTemplate>
-            <h2>                
-                E - Library</h2>
+            <h2>E - Library</h2>
             <table class="nav-justified">
                 <tr>
                     <td width="240">Search</td>
@@ -208,7 +207,7 @@
                 <tr class="folderrow RowFormDetail">
                     <td class="auto-style9">Select Folder</td>
                     <td class="auto-style10">
-                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px">
+                        <asp:DropDownList ID="ddl_select_folder" runat="server" class="form-control" Width="300px" AutoPostBack="True">
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -231,6 +230,7 @@
                 <tr class="RowFormSelectFolder RowFormDetail">                    
                     <td>Select Sub Folder</td>
                     <td class="auto-style8">
+                        
                         <asp:DropDownList ID="ddl_select_sub_folder" runat="server" class="form-control" Width="300px">
                         </asp:DropDownList>
                     </td>
@@ -390,7 +390,7 @@
                     <asp:BoundField DataField="FILE_SIZE" HeaderText="File Size" />
                     <asp:BoundField DataField="UPLOAD_BY" HeaderText="Upload By" />
                     <asp:BoundField DataField="UPLOAD_DATE" HeaderText="Upload Date" DataFormatString="{0:dd-MMM-yyyy}"/>
-                    <asp:hyperlinkfield text="Edit"
+                    <asp:hyperlinkfield text="View"
                     DataNavigateUrlFields="ID"
                     DataNavigateUrlFormatString ="UploadFilesEdit.aspx?ID={0}"           
                     headertext=""

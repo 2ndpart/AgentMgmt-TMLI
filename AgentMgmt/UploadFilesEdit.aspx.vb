@@ -39,13 +39,16 @@ Public Class UploadFilesEdit
 
                     If txt_file_name.Text <> "" Then
                         Session("sts") = 3
-                        txt_file_name.ReadOnly = False
+                        txt_file_name.ReadOnly = True
+                        btnSave.Visible = False
                     ElseIf txt_sub_folder_name.Text <> "" Then
                         Session("sts") = 2
                         txt_sub_folder_name.ReadOnly = False
+                        btnURL.Visible = False
                     ElseIf txt_folder_name.Text <> "" Then
                         Session("sts") = 1
                         txt_folder_name.ReadOnly = False
+                        btnURL.Visible = False
                     Else
 
                     End If
@@ -72,7 +75,7 @@ Public Class UploadFilesEdit
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
                     conn.Open()
 
-                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET FOLDER_NAME=@FOLDER_NAME, UPDATED_BY=@UPDATED_BY, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID", conn)
+                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET FOLDER_NAME=@FOLDER_NAME, UPDATED_BY=@UPDATED_BY, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID AND FOLDER_PARENT_ID = 0", conn)
 
                     Dim updateStatement2 As New SqlCommand("UPDATE FILE_UPLOAD_FOLDER SET FOLDER_NAME=@FOLDER_NAME_2 WHERE FOLDER_LEVEL = 1 AND FOLDER_SELF_ID=" + Session("folderSelfId"), conn)
 
@@ -112,7 +115,7 @@ Public Class UploadFilesEdit
                     conn.ConnectionString = ConfigurationManager.AppSettings("POSWeb_SQLConn")
                     conn.Open()
 
-                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET SUB_FOLDER_NAME=@SUB_FOLDER_NAME, UPDATED_BY=@UPDATED_BY_1, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID", conn)
+                    Dim updateStatement1 As New SqlCommand("UPDATE FILE_UPLOAD SET SUB_FOLDER_NAME=@SUB_FOLDER_NAME, UPDATED_BY=@UPDATED_BY_1, UPDATED_DATE=GETDATE() WHERE FOLDER_SELF_ID=@FOLDER_SELF_ID AND FOLDER_PARENT_ID <> 0", conn)
 
                     Dim updateStatement2 As New SqlCommand("UPDATE FILE_UPLOAD_FOLDER SET FOLDER_NAME=@FOLDER_NAME_2 WHERE FOLDER_LEVEL = 2 AND FOLDER_SELF_ID=" + Session("folderSelfId"), conn)
 
@@ -163,5 +166,21 @@ Public Class UploadFilesEdit
                 End Try
             End If
         End If
+    End Sub
+
+    Protected Sub btnURL_Click(sender As Object, e As EventArgs) Handles btnURL.Click
+        Try
+            Dim serverURL = "https://tmconnect.tokiomarine-life.co.id/"
+            Dim folderRootURL = "ProductRoot/"
+            Dim fileFolderURL = txt_folder_name.Text.Trim + "/"
+            Dim fileSubFolderURL = txt_sub_folder_name.Text.Trim + "/"
+            Dim filenameURL = txt_file_name.Text.Trim
+
+            Dim fullURL = serverURL + folderRootURL + fileFolderURL + fileSubFolderURL + filenameURL
+
+            Page.ClientScript.RegisterStartupScript(Me.[GetType](), "OpenPDFScript", "window.open(' " + fullURL + "');", True)
+        Catch ex As Exception
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Error view file');", True)
+        End Try
     End Sub
 End Class
