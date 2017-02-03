@@ -24,6 +24,7 @@ Public Class UploadFiles
 
     Protected Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         Dim counter As List(Of String) = New List(Of String)
+        Dim reminder As List(Of String) = New List(Of String)
         If Not CreateFolder() Then
             txt_folder_name.Text = ""
             txt_sub_folder_name.Text = ""
@@ -39,11 +40,14 @@ Public Class UploadFiles
         End If
 
         CreateSubFolder()
+
         Try
             If myFile.HasFile Then
                 If txt_version.Text.Equals("") Then
                     counter.Add(myFile.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                ElseIf myFile.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile.FileName)
                 Else
                     UploadFiles(myFile, txt_version.Text, 0)
                 End If
@@ -55,7 +59,9 @@ Public Class UploadFiles
             If myFile0.HasFile Then
                 If txt_version0.Text.Equals("") Then
                     counter.Add(myFile0.FileName)
-                    'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                    'ScriptMan=ager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                ElseIf myFile0.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile0.FileName)
                 Else
                     UploadFiles(myFile0, txt_version0.Text, 1)
                 End If
@@ -65,6 +71,8 @@ Public Class UploadFiles
                 If txt_version1.Text.Equals("") Then
                     counter.Add(myFile1.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                ElseIf myFile1.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile1.FileName)
                 Else
                     UploadFiles(myFile1, txt_version1.Text, 2)
                 End If
@@ -74,6 +82,8 @@ Public Class UploadFiles
                 If txt_version2.Text.Equals("") Then
                     counter.Add(myFile2.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                ElseIf myFile2.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile2.FileName)
                 Else
                     UploadFiles(myFile2, txt_version2.Text, 3)
                 End If
@@ -83,6 +93,8 @@ Public Class UploadFiles
                 If txt_version3.Text.Equals("") Then
                     counter.Add(myFile3.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                ElseIf myFile3.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile3.FileName)
                 Else
                     UploadFiles(myFile3, txt_version3.Text, 4)
                 End If
@@ -92,16 +104,23 @@ Public Class UploadFiles
                 If txt_version4.Text.Equals("") Then
                     counter.Add(myFile4.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                ElseIf myFile4.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile4.FileName)
                 Else
                     UploadFiles(myFile4, txt_version4.Text, 5)
                 End If
             End If
 
             Dim result As String = String.Join(", ", counter)
+            Dim result2 As String = String.Join(", ", reminder)
             If Not result.ToString().Equals("") Then
                 If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormFolder', 'RowFormDetail'); toggleCreateSubFolder(); togglefileupload(); toggleFreshStart();", True)
-                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                    If Not result2.ToString().Equals("") Then
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "\nPlease remove the space from the front of the following files: " + result2.ToString() + "');", True)
+                    Else
+                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                    End If
                 Else
                     ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                     txt_folder_name.Text = ""
@@ -302,10 +321,10 @@ Public Class UploadFiles
 
             'WHERE [FOLDER_NAME]='" & ddl_select_folder.SelectedValue & "' ORDER BY SUB_FOLDER_NAME", conn)
 
-<<<<<<< HEAD
-=======
+            '<<<<<<< HEAD
+            '=======
 
->>>>>>> origin/master
+            '>>>>>>> origin/master
             ddl_select_sub_folder.ClearSelection()
             ddl_select_sub_folder.DataSource = dSource
             ddl_select_sub_folder.DataTextField = "FOLDER_NAME"
@@ -559,6 +578,7 @@ Public Class UploadFiles
 
     Protected Sub btnUpload2_Click(sender As Object, e As EventArgs) Handles btnUpload2.Click
         Dim counter As List(Of String) = New List(Of String)
+        Dim reminder As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
             'txt_folder_name.Text = ""
             'txt_sub_folder_name.Text = ""
@@ -582,6 +602,8 @@ Public Class UploadFiles
                 If txt_version.Text.Equals("") Then
                     counter.Add(myFile.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                ElseIf myFile.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile.FileName)
                 Else
                     UploadFiles(myFile, txt_version.Text, 0)
                 End If
@@ -591,6 +613,8 @@ Public Class UploadFiles
                 If txt_version0.Text.Equals("") Then
                     counter.Add(myFile0.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                ElseIf myFile0.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile0.FileName)
                 Else
                     UploadFiles(myFile0, txt_version0.Text, 1)
                 End If
@@ -600,6 +624,8 @@ Public Class UploadFiles
                 If txt_version1.Text.Equals("") Then
                     counter.Add(myFile1.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                ElseIf myFile1.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile1.FileName)
                 Else
                     UploadFiles(myFile1, txt_version1.Text, 2)
                 End If
@@ -609,6 +635,8 @@ Public Class UploadFiles
                 If txt_version2.Text.Equals("") Then
                     counter.Add(myFile2.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                ElseIf myFile2.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile2.FileName)
                 Else
                     UploadFiles(myFile2, txt_version2.Text, 3)
                 End If
@@ -618,6 +646,8 @@ Public Class UploadFiles
                 If txt_version3.Text.Equals("") Then
                     counter.Add(myFile3.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                ElseIf myFile3.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile3.FileName)
                 Else
                     UploadFiles(myFile3, txt_version3.Text, 4)
                 End If
@@ -627,15 +657,22 @@ Public Class UploadFiles
                 If txt_version4.Text.Equals("") Then
                     counter.Add(myFile4.FileName)
                     'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                ElseIf myFile4.FileName.StartsWith(" ") Then
+                    reminder.Add(myFile4.FileName)
                 Else
                     UploadFiles(myFile4, txt_version4.Text, 5)
                 End If
             End If
 
             Dim result As String = String.Join(", ", counter)
+            Dim result2 As String = String.Join(", ", reminder)
             If Not result.ToString().Equals("") Then
                 ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleCreateSubFolder(); toggleSemiFreshStart();", True)
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                If Not result2.ToString().Equals("") Then
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "\nPlease remove the space from the front of the following files: " + result2.ToString() + "');", True)
+                Else
+                    ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                End If
             Else
                 txt_folder_name.Text = ""
                 txt_sub_folder_name.Text = ""
@@ -661,6 +698,7 @@ Public Class UploadFiles
 
     Protected Sub btnUpload3_Click(sender As Object, e As EventArgs) Handles btnUpload3.Click
         Dim counter As List(Of String) = New List(Of String)
+        Dim reminder As List(Of String) = New List(Of String)
         If ddl_select_folder.SelectedIndex <= 0 Then
             'txt_folder_name.Text = ""
             'txt_sub_folder_name.Text = ""
@@ -680,6 +718,8 @@ Public Class UploadFiles
                     If txt_version.Text.Equals("") Then
                         counter.Add(myFile.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile.FileName + "'');", True)
+                    ElseIf myFile.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile.FileName)
                     Else
                         UploadFiles(myFile, txt_version.Text, 0)
                     End If
@@ -692,6 +732,8 @@ Public Class UploadFiles
                     If txt_version0.Text.Equals("") Then
                         counter.Add(myFile0.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile0.FileName + "'');", True)
+                    ElseIf myFile0.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile0.FileName)
                     Else
                         UploadFiles(myFile0, txt_version0.Text, 1)
                     End If
@@ -701,6 +743,8 @@ Public Class UploadFiles
                     If txt_version1.Text.Equals("") Then
                         counter.Add(myFile1.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile1.FileName + "'');", True)
+                    ElseIf myFile1.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile1.FileName)
                     Else
                         UploadFiles(myFile1, txt_version1.Text, 2)
                     End If
@@ -710,6 +754,8 @@ Public Class UploadFiles
                     If txt_version2.Text.Equals("") Then
                         counter.Add(myFile2.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile2.FileName + "'');", True)
+                    ElseIf myFile2.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile2.FileName)
                     Else
                         UploadFiles(myFile2, txt_version2.Text, 3)
                     End If
@@ -719,6 +765,8 @@ Public Class UploadFiles
                     If txt_version3.Text.Equals("") Then
                         counter.Add(myFile3.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile3.FileName + "'');", True)
+                    ElseIf myFile3.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile3.FileName)
                     Else
                         UploadFiles(myFile3, txt_version3.Text, 4)
                     End If
@@ -728,16 +776,23 @@ Public Class UploadFiles
                     If txt_version4.Text.Equals("") Then
                         counter.Add(myFile4.FileName)
                         'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for '" + myFile4.FileName + "'');", True)
+                    ElseIf myFile4.FileName.StartsWith(" ") Then
+                        reminder.Add(myFile4.FileName)
                     Else
                         UploadFiles(myFile4, txt_version4.Text, 5)
                     End If
                 End If
 
                 Dim result As String = String.Join(", ", counter)
+                Dim result2 As String = String.Join(", ", reminder)
                 If Not result.ToString().Equals("") Then
                     If myFile.HasFile Or myFile0.HasFile Or myFile1.HasFile Or myFile2.HasFile Or myFile3.HasFile Or myFile4.HasFile Then
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
-                        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                        If Not result2.ToString().Equals("") Then
+                            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "\nPlease remove the space from the front of the following files: " + result2.ToString() + "');", True)
+                        Else
+                            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please fill in the version number for " + result.ToString() + "');", True)
+                        End If
                     Else
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallMyFunction", "toggleFormDetail('RowFormSubFile', 'RowFormDetail'); togglefileupload(); togglesecondbutton(); toggleSelectFolder(); toggleReStart();", True)
                         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Please select a file to upload');", True)

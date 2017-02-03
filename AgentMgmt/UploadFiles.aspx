@@ -89,6 +89,7 @@
             }
         }
 
+
         function CheckAll(objRef) {
             var GridView = objRef.parentNode.parentNode.parentNode;
             var inputList = GridView.getElementsByTagName("input");
