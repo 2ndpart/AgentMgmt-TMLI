@@ -302,6 +302,10 @@ Public Class UploadFiles
 
             'WHERE [FOLDER_NAME]='" & ddl_select_folder.SelectedValue & "' ORDER BY SUB_FOLDER_NAME", conn)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
             ddl_select_sub_folder.ClearSelection()
             ddl_select_sub_folder.DataSource = dSource
             ddl_select_sub_folder.DataTextField = "FOLDER_NAME"
