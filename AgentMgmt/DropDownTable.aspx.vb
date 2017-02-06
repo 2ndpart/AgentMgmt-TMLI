@@ -169,8 +169,12 @@ Public Class DropDownTable
 
         If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Picture_Other_Type") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Picture_Payment_Type") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Channel") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Data_Cabang") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Nationality") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_OCCP") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Relation") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Religion") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Payment_Method") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Bank") Then
 
-        ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Annual_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Gender") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Referral") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Source_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Status") Then
+        ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Annual_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Gender") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Referral") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Source_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Status") Then
 
+        ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Then
+            table2.Tables(0).Columns.Remove("item_time")
+            table2.Tables(0).Columns.Remove("OccpClass")
+            table2.Tables(0).Columns.Remove("Status")
         ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Payment_Method_Rules") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Insured_Fin_Document") Then
 
         Else
@@ -374,9 +378,16 @@ Public Class DropDownTable
         Dim sql2 As String = "SELECT COLUMN_NAME FROM information_schema.COLUMNS where TABLE_NAME = '" + ddlNumberOfRows.SelectedItem.Text + "' AND COLUMN_NAME != 'IsNew' AND COLUMN_NAME != 'IsUpdate' AND COLUMN_NAME != 'RowStatus' AND COLUMN_NAME != 'AlamatCabang' AND COLUMN_NAME != 'IbuKota' AND COLUMN_NAME != 'DATIII'" +
         "AND COLUMN_NAME != 'KodePos' AND COLUMN_NAME != 'Propinsi' AND COLUMN_NAME != 'SLJJ' " +
         "AND COLUMN_NAME != 'Telepon' AND COLUMN_NAME != 'Fax' AND COLUMN_NAME != 'StatusRollOut' " +
-        "AND COLUMN_NAME != 'TanggalRollOut' AND COLUMN_NAME != 'StatusPrioritas' AND COLUMN_NAME != 'JumlahCabang'"
+        "AND COLUMN_NAME != 'TanggalRollOut' AND COLUMN_NAME != 'StatusPrioritas' AND COLUMN_NAME != 'JumlahCabang' " +
+        "AND COLUMN_NAME != 'OccpClass'"
+
+        Dim extra As String = " AND COLUMN_NAME != 'Status' AND COLUMN_NAME != 'item_time'"
         Dim num As Integer = 0
         Dim dt1 As New DataTable
+
+        If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Then
+            sql2 = sql2 + extra
+        End If
 
         objDBCom.ExecuteSQL(dt1, sql2)
         objDBCom.Dispose()
@@ -598,7 +609,12 @@ Public Class DropDownTable
 
             Count += 1
         Next
-        B = B + ",IsUpdate = getdate(), RowStatus = 'U'"
+        If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Annual_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Gender") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Referral") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Source_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Status") Then
+
+        Else
+            B = B + ", IsUpdate = getdate(), RowStatus = 'U'"
+        End If
+        'B = B + ",IsUpdate = getdate(), RowStatus = 'U'"
         Dim A As String = "Update " + ddlNumberOfRows.SelectedItem.Text + " "
 
         ScriptComment = A + B + C
