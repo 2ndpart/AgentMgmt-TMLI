@@ -21,7 +21,7 @@ Public Class EditAgentAdmin
             Exit Sub
         Else
             Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
-            Dim sql As String = "Update TMLI_Agent_Profile set ADMINPASS = @AdminPass where AGENTADMIN = @AdminName"
+            Dim sql As String = "Update TMLI_Agent_Profile set AdminPassword = @AdminPass where Admin = @AdminName"
             Dim dt As New DataTable
 
             objDBCom.AddParameter("@AdminPass", SqlDbType.VarChar, ms.EncryptString(txt_new.Text, "1234567891123456"))
@@ -75,7 +75,7 @@ Public Class EditAgentAdmin
 
     Protected Sub loadprofile()
         Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
-        Dim sql As String = "Select distinct AGENTADMIN, ADMINPASS from TMLI_Agent_Profile"
+        Dim sql As String = "Select distinct Admin , AdminPassword from TMLI_Agent_Profile"
 
 
         objDBCom.ExecuteSQL(dtl, sql)
