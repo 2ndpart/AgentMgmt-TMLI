@@ -174,7 +174,6 @@ Public Class DropDownTable
         ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Then
             table2.Tables(0).Columns.Remove("item_time")
             table2.Tables(0).Columns.Remove("OccpClass")
-            table2.Tables(0).Columns.Remove("Status")
         ElseIf ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Payment_Method_Rules") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Insured_Fin_Document") Then
 
         Else
@@ -317,6 +316,11 @@ Public Class DropDownTable
         "AND COLUMN_NAME != 'Telepon' AND COLUMN_NAME != 'Fax' AND COLUMN_NAME != 'StatusRollOut'" +
         "AND COLUMN_NAME != 'TanggalRollOut' AND COLUMN_NAME != 'StatusPrioritas' AND COLUMN_NAME != 'JumlahCabang'"
         Dim dt1 As New DataTable
+
+        Dim extra As String = " AND COLUMN_NAME != 'item_time'"
+        If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Then
+            sql1 = sql1 + extra
+        End If
 
         objDBCom.ExecuteSQL(dt1, sql1)
 
