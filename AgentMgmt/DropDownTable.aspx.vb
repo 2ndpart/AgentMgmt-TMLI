@@ -625,7 +625,7 @@ Public Class DropDownTable
         ScriptComment2 = A + C
         aftercomment1 = temphead + tempbody + tempend
         If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Channel") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Data_Cabang") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Nationality") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_OCCP") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Relation") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_eProposal_Religion") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Payment_Method") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Bank") Then
-            If objDBCom.ExecuteSQL(ScriptComment2) Then
+            If objDBCom.ExecuteSQL(ScriptComment) Then
                 objDBCom.ExecuteSQL(aftercomment1)
                 BindGridWithStatus(1)
                 updatemaster()
