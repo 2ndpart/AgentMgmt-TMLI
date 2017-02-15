@@ -287,7 +287,7 @@ Public Class DropDownTable
             btn_addnew.Visible = False
             btn_Search.Visible = False
         Else
-            If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_kodepos") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Annual_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Gender") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Marital_Status") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Occupation") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Referral") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Source_Income") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Status") Then
+            If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_kodepos") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Then
                 BindGridWithStatus(1)
                 chkStatus.Visible = False
                 lbl_state.Visible = True
@@ -385,7 +385,7 @@ Public Class DropDownTable
         "AND COLUMN_NAME != 'TanggalRollOut' AND COLUMN_NAME != 'StatusPrioritas' AND COLUMN_NAME != 'JumlahCabang' " +
         "AND COLUMN_NAME != 'OccpClass'"
 
-        Dim extra As String = " AND COLUMN_NAME != 'Status' AND COLUMN_NAME != 'item_time'"
+        Dim extra As String = " AND COLUMN_NAME != 'item_time'"
         Dim num As Integer = 0
         Dim dt1 As New DataTable
 
@@ -414,6 +414,10 @@ Public Class DropDownTable
             TXT.Attributes.Add("readonly", "readonly")
             If TXT.Text = "&nbsp;" Then
                 TXT.Text = String.Empty
+            ElseIf TXT.Text.Contains("&gt;") Then
+                TXT.Text = TXT.Text.Replace("&gt;", ">")
+            ElseIf TXT.Text.Contains("&lt;") Then
+                TXT.Text = TXT.Text.Replace("&lt;", "<")
             End If
         Next
 
