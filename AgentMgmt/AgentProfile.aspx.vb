@@ -352,7 +352,7 @@ Public Class AgentProfile
                 objDBCom.ExecuteSQL(tempDt, selectCount)
                 Dim messageId = txt_Code.Text
 
-                If tempDt.Rows.Count > 0 Then
+                If tempDt.Rows(0)(0) > 0 Then
                     Dim sqlInsert As String = "UPDATE TMLI_SendEmail SET EmailTo=@emailTo, EmailContent=@content, EmailStatus=@status WHERE EmailID=@id"
                     Dim comm As New SqlCommand(sqlInsert)
                     comm.Parameters.AddWithValue("@id", txt_Code.Text)
