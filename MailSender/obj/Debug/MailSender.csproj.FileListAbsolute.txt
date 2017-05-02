@@ -10,3 +10,9 @@ C:\Users\Eugene\Desktop\TokioMarineLifeInsurance\AgentMgmt - TMLI\AgentMgmt - TM
 C:\Users\Eugene\Desktop\TokioMarineLifeInsurance\AgentMgmt - TMLI\AgentMgmt - TMLI\MailSender\obj\Debug\MailSender.csprojResolveAssemblyReference.cache
 C:\Users\Eugene\Desktop\TokioMarineLifeInsurance\AgentMgmt - TMLI\AgentMgmt - TMLI\MailSender\obj\Debug\MailSender.exe
 C:\Users\Eugene\Desktop\TokioMarineLifeInsurance\AgentMgmt - TMLI\AgentMgmt - TMLI\MailSender\obj\Debug\MailSender.pdb
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\bin\Debug\MailSender.exe
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\bin\Debug\MailSender.pdb
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\bin\Debug\AjaxMin.dll
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\obj\Debug\MailSender.csprojResolveAssemblyReference.cache
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\obj\Debug\MailSender.exe
+D:\Work\SourceCode\AgentMgmt-TMLI-master\MailSender\obj\Debug\MailSender.pdb

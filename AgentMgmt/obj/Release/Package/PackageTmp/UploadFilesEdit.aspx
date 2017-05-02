@@ -88,7 +88,8 @@
                 &nbsp;</td>
             <td>
                 <asp:Button ID="btnSave" class="btn btn-primary" runat="server" Text="Save" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="btnCancel" runat="server" class="btn btn-primary" Text="Cancel" />
+                <asp:Button ID="btnCancel" runat="server" class="btn btn-primary" Text="Cancel" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnURL" runat="server" class="btn btn-primary" Text="View File" />
             </td>
             <td>
                 &nbsp;</td>

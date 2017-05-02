@@ -92,6 +92,9 @@
                 <li id="fooItem" runat="server">
                     <a href="UploadFiles.aspx">E-Library</a>
                 </li>
+                <li id="Li1" runat="server">
+                    <a href="UploadFiles.aspx">SPAJ Administration</a>
+                </li>
                 <%--<li id="fooItem" runat="server">
                     <a href="DeviceManagement.aspx">Device Management</a>
                 </li>--%>

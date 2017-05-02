@@ -257,13 +257,13 @@ Partial Public Class AgentProfile
     Protected WithEvents txt_nationality As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txt_email control.
+    '''ddl_email control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_email As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddl_email As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''txt_CountryCode control.

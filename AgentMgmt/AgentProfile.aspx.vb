@@ -115,7 +115,8 @@ Public Class AgentProfile
         txt_Code.Attributes.Add("readonly", "readonly")
         txt_CountryCode.Attributes.Add("readonly", "readonly")
         txt_dob.Attributes.Add("readonly", "readonly")
-        txt_email.Attributes.Add("readonly", "readonly")
+        'txt_email.Attributes.Add("readonly", "readonly")
+        ddl_email.Attributes.Add("readonly", "readonly")
         txt_Fname.Attributes.Add("readonly", "readonly")
         txt_gender.Attributes.Add("readonly", "readonly")
         txt_HireDate.Attributes.Add("readonly", "readonly")
@@ -165,11 +166,13 @@ Public Class AgentProfile
 ,AgentAddr1,AgentAddr2,AgentAddr3,CLTADDR04,CLTADDR05,CLTPCODE,CTRYCODE,AgentEmail,AgentContactNumber
 ,CLTPHONE01,CLTPHONE02,TAXMETH,XREFNO,ZRELIGN,LicenseStartDate,LicenseExpiryDate,Level,SALESUNIT,DirectSupervisorCode
 ,TLAGLICNO,TLICEXPDT,TLAGLICNO_S,TLICEXPDT_S,BANKKEY,BANKACOUNT,BANKACCDSC,AgentStatus,UPDATEDATE,LastLogonDate
-,UDID,DeviceStatus,Admin,AdminPassword from TMLI_Agent_Profile where AgentCode = '" + row.Cells(1).Text + "'"
+,UDID,DeviceStatus,Admin,AdminPassword,emailPersonal from TMLI_Agent_Profile where AgentCode = '" + row.Cells(1).Text + "'"
         objDBCom.ExecuteSQL(dt, sql)
         objDBCom.Dispose()
 
         If dt.Rows.Count <> 0 Then
+            ddl_email.Items.Clear()
+
             txt_AccHolder.Text = dt.Rows(0)(36).ToString()
             txt_AccNum.Text = dt.Rows(0)(35).ToString()
             txt_add1.Text = dt.Rows(0)(11).ToString()
@@ -185,7 +188,9 @@ Public Class AgentProfile
             txt_Code.Text = dt.Rows(0)(0).ToString()
             txt_CountryCode.Text = dt.Rows(0)(17).ToString()
             txt_dob.Text = dt.Rows(0)(5).ToString()
-            txt_email.Text = dt.Rows(0)(18).ToString()
+            'txt_email.Text = dt.Rows(0)(18).ToString()
+            ddl_email.Items.Add(dt.Rows(0)(18).ToString())
+            ddl_email.Items.Add(dt.Rows(0)("emailPersonal").ToString())
             txt_Fname.Text = dt.Rows(0)(3).ToString()
             txt_gender.Text = dt.Rows(0)(4).ToString()
             txt_HireDate.Text = dt.Rows(0)(25).ToString()
@@ -342,8 +347,7 @@ Public Class AgentProfile
 
                 Dim ipadimage As String = "http://tmconnect.tokiomarine-life.co.id/ipad.png"
                 Dim desktopimage As String = "http://tmconnect.tokiomarine-life.co.id/desktop.png"
-                Dim messageBody As String = String.Format(body, "https://tmconnect.tokiomarine-life.co.id/anvoaiwenvwae0v-wevjhweivnawuen12j3n12m%20asjkdfna%20sdjf%20123.html", ipadimage, "http://www.google.com",
-                                                      desktopimage, "<STRONG>Kode Agen Anda</STRONG>", encrypt.DecryptString(txt_pass.Text, "1234567891123456"))
+                Dim messageBody As String = String.Format(body, encrypt.DecryptString(txt_pass.Text, "1234567891123456"))
 
                 Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(CStr(POSWeb.POSWeb_SQLConn))
                 Dim selectCount As String = "SELECT COUNT(EmailID) FROM TMLI_SendEmail WHERE EmailID=" & txt_Code.Text
@@ -352,21 +356,38 @@ Public Class AgentProfile
                 objDBCom.ExecuteSQL(tempDt, selectCount)
                 Dim messageId = txt_Code.Text
 
+                Dim dt As New DataTable
+                Dim objDBcommand = New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
+                objDBcommand.AddParameter("@AgentCode", SqlDbType.NVarChar, txt_Code.Text)
+                objDBcommand.ExecuteProcedure(dt, "TMLI_WS_Agent_Profile_ForgotPassword")
+                objDBcommand.Dispose()
+                Dim agentEmail As String = String.Empty
+                Dim emailPersonal As String = String.Empty
+
+                If dt.Rows.Count > 0 Then
+                    agentEmail = dt.Rows(0)("AgentEmail").ToString()
+                    emailPersonal = dt.Rows(0)("EmailPersonal").ToString()
+                End If
+
                 If tempDt.Rows(0)(0) > 0 Then
-                    Dim sqlInsert As String = "UPDATE TMLI_SendEmail SET EmailTo=@emailTo, EmailContent=@content, EmailStatus=@status WHERE EmailID=@id"
+                    Dim sqlInsert As String = "UPDATE TMLI_SendEmail SET EmailTo=@emailTo, EmailContent=@content, EmailStatus=@status, EmailSubject=@emailSubject, EmailTime=@emailTime WHERE EmailID=@id"
                     Dim comm As New SqlCommand(sqlInsert)
                     comm.Parameters.AddWithValue("@id", txt_Code.Text)
-                    comm.Parameters.AddWithValue("@emailTo", txt_email.Text)
+                    comm.Parameters.AddWithValue("@emailTo", agentEmail + ";" + emailPersonal)
                     comm.Parameters.AddWithValue("@content", messageBody)
                     comm.Parameters.AddWithValue("@status", "Sending")
+                    comm.Parameters.AddWithValue("@emailSubject", "Aktivasi Aplikasi TMConnect")
+                    comm.Parameters.AddWithValue("@emailTime", Now)
                     result = objDBCom.ExecuteSqlCommand(comm)
                 Else
-                    Dim sqlInsert As String = "INSERT INTO TMLI_SendEmail VALUES (@id,@emailTo,@content,@status)"
+                    Dim sqlInsert As String = "INSERT INTO TMLI_SendEmail VALUES (@id,@emailTo,@content,@status,@emailSubject,@emailTime)"
                     Dim comm As New SqlCommand(sqlInsert)
                     comm.Parameters.AddWithValue("@id", txt_Code.Text)
-                    comm.Parameters.AddWithValue("@emailTo", txt_email.Text)
+                    comm.Parameters.AddWithValue("@emailTo", agentEmail + ";" + emailPersonal)
                     comm.Parameters.AddWithValue("@content", messageBody)
                     comm.Parameters.AddWithValue("@status", "Sending")
+                    comm.Parameters.AddWithValue("@emailSubject", "Aktivasi Aplikasi TMConnect")
+                    comm.Parameters.AddWithValue("@emailTime", Now)
                     result = objDBCom.ExecuteSqlCommand(comm)
                 End If
 
@@ -393,12 +414,13 @@ Public Class AgentProfile
                     myProcess.WaitForExit()
                     myProcess.Close()
 
+
                     'update the records for invitation send date
 
-                    'Dim command As New SqlCommand("UPDATE TMLI_Agent_Profile SET InvitationDate = @invitation WHERE AgentCode =@agentCode")
-                    'command.Parameters.AddWithValue("@invitation", Now)
-                    'command.Parameters.AddWithValue("@agentCode", txt_Code.Text)
-                    'objDBCom.ExecuteSqlCommand(command)
+                    Dim command As New SqlCommand("UPDATE TMLI_Agent_Profile SET InvitationDate = @invitation WHERE AgentCode =@agentCode")
+                    command.Parameters.AddWithValue("@invitation", Now)
+                    command.Parameters.AddWithValue("@agentCode", txt_Code.Text)
+                    objDBCom.ExecuteSqlCommand(command)
 
                     ScriptManager.RegisterStartupScript(Me, Me.[GetType](), "alert", "alert('Success!');", True)
                 Else
@@ -421,7 +443,7 @@ Public Class AgentProfile
             Dim newUserName As String = "tmli\tmconnect.no-reply"
             Dim userpass As String = "tmc0nn3ct!"
             Dim smtp As New SmtpClient()
-            Dim message As New MailMessage(useremail, txt_email.Text)
+            Dim message As New MailMessage(useremail, ddl_email.Items(0).Text)
             message.Subject = "Reset TMLI TMConnect Password"
             message.Body = String.Format("Dear {0},<br /><br />Good day.<br /><br />Please click on the link below to reset your password." &
                                          "<br /><br />https://tmconnect.tokiomarine-life.co.id/TMLI_MPOS/AgentResetPwd.aspx?AgentCode=" & "{1}" &
@@ -549,7 +571,7 @@ Public Class AgentProfile
 ,AgentAddr1,AgentAddr2,AgentAddr3,CLTADDR04,CLTADDR05,CLTPCODE,CTRYCODE,AgentEmail,AgentContactNumber
 ,CLTPHONE01,CLTPHONE02,TAXMETH,XREFNO,ZRELIGN,LicenseStartDate,LicenseExpiryDate,Level,SALESUNIT,DirectSupervisorCode
 ,TLAGLICNO,TLICEXPDT,TLAGLICNO_S,TLICEXPDT_S,BANKKEY,BANKACOUNT,BANKACCDSC,AgentStatus,UPDATEDATE,LastLogonDate
-,UDID,DeviceStatus,Admin,AdminPassword from TMLI_Agent_Profile"
+,UDID,DeviceStatus,Admin,AdminPassword,InvitationDate,RegisterDate,DevicePlatform,UDID from TMLI_Agent_Profile"
         Dim dt As New DataTable
         Dim sb As New StringBuilder()
         objDBCom.ExecuteSQL(dt, sql)
@@ -558,7 +580,7 @@ Public Class AgentProfile
         For i As Integer = 0 To dt.Columns.Count - 1
             sb.Append(dt.Columns(i))
             If i < dt.Columns.Count - 1 Then
-                sb.Append(",")
+                sb.Append(vbTab)
             End If
         Next
         sb.AppendLine()
@@ -573,7 +595,7 @@ Public Class AgentProfile
                 'End If
 
                 If i < dt.Columns.Count - 1 Then
-                    sb.Append(",")
+                    sb.Append(vbTab)
                 End If
             Next
             sb.AppendLine()
@@ -581,7 +603,7 @@ Public Class AgentProfile
 
         Response.Clear()
         Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=Agent_List_" + DateTime.Now + ".csv")
+        Response.AddHeader("content-disposition", "attachment;filename=Agent_List_" + DateTime.Now + ".xls")
         Response.Charset = ""
         Response.ContentType = "application/text"
         Response.Output.Write(sb)

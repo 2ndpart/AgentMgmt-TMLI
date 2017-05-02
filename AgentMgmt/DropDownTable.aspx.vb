@@ -287,7 +287,7 @@ Public Class DropDownTable
             btn_addnew.Visible = False
             btn_Search.Visible = False
         Else
-            If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_kodepos") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Then
+            If ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_kodepos") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Age") Or ddlNumberOfRows.SelectedItem.Text.Equals("TMLI_Score_Prospect_Status") Then
                 BindGridWithStatus(1)
                 chkStatus.Visible = False
                 lbl_state.Visible = True

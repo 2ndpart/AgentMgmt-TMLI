@@ -1,0 +1,13 @@
+03:39:54PM -- ExecuteSQL(DataRetriever,  SELECT [UserName], [Password], [Roles], [PasswordChangeSince] FROM TMLI_UserLogin  WHERE [UserName] = 'user' Collate SQL_Latin1_General_CP1_CS_AS AND [Password] = 'x+y8EKOihgMzvsKWzrS1Dw==' Collate SQL_Latin1_General_CP1_CS_AS) : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Shared Memory Provider, error: 40 - Could not open a connection to SQL Server)
+03:57:25PM -- ExecuteSQL(Update TMLI_Score_Prospect_Occupation set OccpDesc = 'Wiraswasta' ,Poin = '6' ,IsUpdate = getdate(), RowStatus = 'U' Where Occp_Code = '1') : Invalid column name 'IsUpdate'.
+Invalid column name 'RowStatus'.
+04:00:40PM -- ExecuteSQL(Update TMLI_Score_Prospect_Referral set Referral_Source = 'Nasabah' ,Referral_Score = '6' ,IsUpdate = getdate(), RowStatus = 'U' Where Referral_No = '1') : Invalid column name 'IsUpdate'.
+Invalid column name 'RowStatus'.
+04:05:49PM -- ExecuteSQL(Update TMLI_Score_Prospect_Occupation  Where Occp_Code = '1') : Incorrect syntax near the keyword 'Where'.
+04:13:29PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.
+04:13:39PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.
+04:13:53PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.
+04:14:00PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.
+04:28:07PM -- ExecuteSQL(DataRetriever, select distinct Wilayah, Kanwil from Data_Cabang) : Invalid object name 'Data_Cabang'.
+04:56:19PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.
+04:56:28PM -- ExecuteSQL(Update TMLI_Agent_Profile set ) : Incorrect syntax near 'set'.

@@ -380,15 +380,22 @@ Public Class UploadFiles
 
                         Dim objDBCom As New MySQLDBComponent.MySQLDBComponent(POSWeb.POSWeb_SQLConn)
 
+                        Dim validFolderName As String = ""
+
+                        validFolderName = Regex.Replace(txt_folder_name.Text, "\s+", " ")
+
                         Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [FOLDER_NAME]) VALUES (0, " + folderSelfId.ToString() + ", @FOLDER_NAME_1)"
-                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
+                        'objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", txt_folder_name.Text.Trim)
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_1", validFolderName)
 
                         Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL]) VALUES (@FOLDER_NAME_2, " + folderSelfId.ToString() + ", 1)"
-                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text.Trim)
+                        'objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", txt_folder_name.Text.Trim)
+                        objDBCom.Parameters.AddWithValue("@FOLDER_NAME_2", validFolderName)
 
                         If objDBCom.ExecuteSQL(insertFolderStatement1) Then
                             If objDBCom.ExecuteSQL(insertFolderStatement2) Then
-                                Directory.CreateDirectory(folderName + txt_folder_name.Text.Trim)
+                                'Directory.CreateDirectory(folderName + txt_folder_name.Text.Trim)
+                                Directory.CreateDirectory(folderName + validFolderName)
                                 'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                                 loadFolder()
                                 FillGrid()
@@ -424,8 +431,6 @@ Public Class UploadFiles
         End If
 
         objDBCom.ExecuteSQL(takevalue, takedataquery)
-
-
 
         If txt_sub_folder_name.Text.Trim <> "" Then
             If Not FolderNameIsOK(txt_sub_folder_name.Text.Trim) Then
@@ -463,18 +468,21 @@ Public Class UploadFiles
 
                         conn.Close()
 
-
+                        Dim validSubFolderName As String = ""
+                        validSubFolderName = Regex.Replace(txt_sub_folder_name.Text, "\s+", " ")
 
                         Dim insertFolderStatement1 As String = "INSERT INTO FILE_UPLOAD ([FOLDER_PARENT_ID], [FOLDER_SELF_ID], [SUB_FOLDER_NAME], [FOLDER_NAME]) VALUES (" + takevalue.Rows(0)(1).ToString() + ", " + folderSelfId.ToString() + ", @SUB_FOLDER_NAME_1, @FOLDER_NAME)"
-                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
+                        'objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", txt_sub_folder_name.Text.Trim)
+                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_1", validSubFolderName)
                         objDBCom.Parameters.AddWithValue("@FOLDER_NAME", takevalue.Rows(0)(0).ToString())
 
                         Dim insertFolderStatement2 As String = "INSERT INTO FILE_UPLOAD_FOLDER ([FOLDER_NAME], [FOLDER_SELF_ID], [FOLDER_LEVEL], [FOLDER_PARENT_ID]) VALUES (@SUB_FOLDER_NAME_2, " + folderSelfId.ToString() + ", 2, " + takevalue.Rows(0)(1).ToString() + ")"
-                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)
+                        'objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", txt_sub_folder_name.Text.Trim)
+                        objDBCom.Parameters.AddWithValue("@SUB_FOLDER_NAME_2", validSubFolderName)
 
                         If objDBCom.ExecuteSQL(insertFolderStatement1) Then
                             If objDBCom.ExecuteSQL(insertFolderStatement2) Then
-                                Directory.CreateDirectory(folderName + takevalue.Rows(0)(0).ToString() + "\" + txt_sub_folder_name.Text.Trim)
+                                Directory.CreateDirectory(folderName + takevalue.Rows(0)(0).ToString() + "\" + validSubFolderName)
                                 'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "CallAlertmsg", "alert('Folder successfully created');", True)
                                 loadSubFolder()
                                 FillGrid()
@@ -518,7 +526,9 @@ Public Class UploadFiles
             Dim hpf As HttpPostedFile = hfc(count)
             If hpf.ContentLength > 0 Then
                 Dim strFileName As String = ""
-                strFileName = hpf.FileName
+
+                strFileName = Regex.Replace(hpf.FileName, "\s+", " ")
+
                 Dim intFileSize As Int64
                 intFileSize = hpf.ContentLength
                 Dim strSubFolder As String = ""

@@ -79,6 +79,6 @@
         objDBCom.ExecuteSQL(dtl, q1)
         objDBCom.Dispose()
 
-        txt_username.Text = dtl.Rows(0)(0).ToString()
+        txt_username.Text = dtl.Rows(0)(1).ToString()
     End Sub
 End Class

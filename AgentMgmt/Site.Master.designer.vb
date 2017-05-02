@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Site
-    
+
     '''<summary>
     '''Head1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
-    
+
     '''<summary>
     '''HeadContent control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HeadContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    
+
     '''<summary>
     '''Form1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+
     '''<summary>
     '''btn_lgout control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_lgout As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''sidebar control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents sidebar As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''Agent_Profile control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Agent_Profile As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''Table_Maintenance control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Table_Maintenance As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''TMCONNECT_Version control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TMCONNECT_Version As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''User_Management control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents User_Management As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''Edit_TMCONNECT_Client control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Edit_TMCONNECT_Client As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''Edit_TMCONNECT_Server control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Edit_TMCONNECT_Server As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''SPAJ_Admin control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SPAJ_Admin As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''VA_Number_Listing control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents VA_Number_Listing As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''STP_Rules_Table control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents STP_Rules_Table As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''TMCONNECT_Client_Photos control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TMCONNECT_Client_Photos As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''Payment_Lsting control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Payment_Lsting As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''fooItem control.
     '''</summary>
@@ -165,7 +165,16 @@ Partial Public Class Site
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents fooItem As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
+    '''<summary>
+    '''Li1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Li1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
     '''<summary>
     '''MainContent control.
     '''</summary>

@@ -1,0 +1,23 @@
+11:57:00AM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+12:18:33PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+12:19:16PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+12:44:54PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+12:45:52PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+12:48:46PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+01:58:42PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:25:27PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:26:50PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:29:17PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:31:19PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:33:28PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:35:29PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:48:15PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+02:51:30PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+03:08:40PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+03:09:35PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+03:12:05PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+03:56:24PM -- ExecuteSQL(DataRetriever,  SELECT [UserName], [Password], [Roles], [PasswordChangeSince] FROM TMLI_UserLogin  WHERE [UserName] = 'user' Collate SQL_Latin1_General_CP1_CS_AS AND [Password] = 'T5FwEPhxyzSZ0Fkg7wLR+w==' Collate SQL_Latin1_General_CP1_CS_AS) : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Shared Memory Provider, error: 40 - Could not open a connection to SQL Server)
+03:56:28PM -- ExecuteSQL(DataRetriever,  SELECT [UserName], [Password], [Roles], [PasswordChangeSince] FROM TMLI_UserLogin  WHERE [UserName] = 'user' Collate SQL_Latin1_General_CP1_CS_AS AND [Password] = 'x+y8EKOihgMzvsKWzrS1Dw==' Collate SQL_Latin1_General_CP1_CS_AS) : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Shared Memory Provider, error: 40 - Could not open a connection to SQL Server)
+03:57:30PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+04:05:36PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.
+04:09:14PM -- ExecuteProcedure(DataRetriever, AgentProfilePaging) : Could not find stored procedure 'AgentProfilePaging'.

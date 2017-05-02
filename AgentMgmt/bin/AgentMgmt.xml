@@ -6,6 +6,63 @@ AgentMgmt
 </name>
 </assembly>
 <members>
+<member name="T:AgentMgmt.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.Application">
+ <summary>
+ Returns information about the current application.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="P:AgentMgmt.My.MyWebExtension.WebServices">
+ <summary>
+ Provides access to WebServices added to this project.
+ </summary>
+</member>
+<member name="T:AgentMgmt.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:AgentMgmt.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:AgentMgmt.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
 <member name="F:AgentMgmt.AddUser._Panel1">
 <summary>
 Panel1 control.
@@ -1167,9 +1224,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:AgentMgmt.AgentProfile._txt_email">
+<member name="F:AgentMgmt.AgentProfile._ddl_email">
 <summary>
-txt_email control.
+ddl_email control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1437,63 +1494,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="T:AgentMgmt.My.MyWebExtension">
- <summary>
- Module used to define the properties that are available in the My Namespace for Web projects.
- </summary>
- <remarks></remarks>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.Application">
- <summary>
- Returns information about the current application.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.Computer">
- <summary>
- Returns information about the host computer.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.User">
- <summary>
- Returns information for the current Web user.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.Request">
- <summary>
- Returns Request object.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.Response">
- <summary>
- Returns Response object.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.Log">
- <summary>
- Returns the Asp log object.
- </summary>
-</member>
-<member name="P:AgentMgmt.My.MyWebExtension.WebServices">
- <summary>
- Provides access to WebServices added to this project.
- </summary>
-</member>
-<member name="T:AgentMgmt.My.Resources.Resources">
-<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member>
-<member name="P:AgentMgmt.My.Resources.Resources.ResourceManager">
-<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member>
-<member name="P:AgentMgmt.My.Resources.Resources.Culture">
-<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member>
 <member name="F:AgentMgmt.PhotoUpload._fileupload">
 <summary>
 fileupload control.
@@ -1659,6 +1659,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.Site._fooItem">
 <summary>
 fooItem control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.Site._Li1">
+<summary>
+Li1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1875,6 +1884,213 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:AgentMgmt.SPAJDistributionDetails._SPAJSubmission">
 <summary>
 SPAJSubmission control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreation._LinkButton1">
+<summary>
+LinkButton1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreation._GridView1">
+<summary>
+GridView1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label1">
+<summary>
+Label1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._ddl_productType">
+<summary>
+ddl_productType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label2">
+<summary>
+Label2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._txt_bankName">
+<summary>
+txt_bankName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label3">
+<summary>
+Label3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._ctrlNumber_numberOfChar">
+<summary>
+ctrlNumber_numberOfChar control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label4">
+<summary>
+Label4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._ctrlNumber_value">
+<summary>
+ctrlNumber_value control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label5">
+<summary>
+Label5 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._runningNumber_numberOfChar">
+<summary>
+runningNumber_numberOfChar control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label6">
+<summary>
+Label6 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._runningNumber_value">
+<summary>
+runningNumber_value control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label7">
+<summary>
+Label7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._checkDigit_formula">
+<summary>
+checkDigit_formula control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label8">
+<summary>
+Label8 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._bankCode_value">
+<summary>
+bankCode_value control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._Label9">
+<summary>
+Label9 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._txt_example">
+<summary>
+txt_example control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._btnCancel">
+<summary>
+btnCancel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:AgentMgmt.SPAJNumberCreationDetails._btnSave">
+<summary>
+btnSave control.
 </summary>
 <remarks>
 Auto-generated field.

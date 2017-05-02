@@ -155,7 +155,7 @@
                 Width="200px" class="btn btn-warning"/>
         </p>
         <p>
-            <asp:Button ID="btn_export" runat="server" Text="Export .csv File" 
+            <asp:Button ID="btn_export" runat="server" Text="Export .xls File" 
                 Width="200px" class="btn btn-warning"/>
         </p>
     </div>
@@ -281,7 +281,8 @@
             </td>
             <td>Email</td>
             <td>
-                <asp:TextBox ID="txt_email" runat="server" class="form-control" Width="300px"></asp:TextBox>
+                <asp:DropDownList ID="ddl_email" runat="server" class="form-control" Width="300px">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
